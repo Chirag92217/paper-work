@@ -16,7 +16,7 @@
 \newcommand{\AffilTwo}{Department / Institute, Name of University, City -- PIN, India}
 \newcommand{\CorrEmail}{corresponding.author@example.com}
 \newcommand{\RunningAuthors}{\AuthorOne{} and \AuthorTwo{}}
-\newcommand{\RunningTitle}{Groundwater in Lesser Himalayan Watersheds: A Comparative Review}
+\newcommand{\RunningTitle}{Groundwater in Two Lesser Himalayan Catchments: A Review}
 
 % ---------------------------------------------------------------------
 %  Packages
@@ -95,8 +95,8 @@
 \thispagestyle{firstpage}
 \begin{center}
   {\fontsize{16}{20}\selectfont\bfseries
-   Groundwater Resources of Lesser Himalayan Watersheds in Himachal Pradesh, India:
-   A Comparative Review of Occurrence, Hydrochemistry and Recharge Planning\par}
+   Groundwater in Two Lesser Himalayan Catchments of Himachal Pradesh, India:
+   A Review of Resource, Quality and Recharge Studies\par}
   \vspace{9pt}
   {\large \AuthorOne\textsuperscript{1*} and \AuthorTwo\textsuperscript{2}\par}
   \vspace{5pt}
@@ -111,31 +111,22 @@
 \vspace{4pt}
 {\bfseries Abstract}\par\vspace{3pt}
 \small
-Mountain aquifers of the Indian Himalaya sustain drinking water, minor irrigation and
-spring flow for a large and growing population, yet they remain far less understood than
-the aquifers of the plains. This review compares three studies from two Lesser Himalayan
-catchments of Himachal Pradesh: a hydrogeological appraisal of groundwater development in
-the Suketi river basin (Mandi district), a two-season hydrochemical survey of the same
-basin, and a geospatial multi-criteria analysis of groundwater potential and recharge
-siting in the Gaj watershed (Kangra district). The studies are read through a common
-framework covering physical setting, data and methods, groundwater occurrence, water
-quality, temporal behaviour and management proposals. In the Suketi basin, usable
-groundwater is concentrated in the valley-fill of the Balh valley, where only about 22\% of
-the assessed dynamic resource is drawn, while the surrounding hills rely on low-yield
-fracture and depression springs that mostly fall in Meinzer magnitudes VI to VIII. The
-groundwater there is a slightly alkaline Ca--HCO\textsubscript{3} water that is generally fit for
-drinking and irrigation, apart from one granite-hosted bore well with 4.2~mg/L fluoride and
-raised nitrate near the towns of Mandi and Rewalsar. In the Gaj watershed, the share of very
-high groundwater potential fell between 2010 and 2022 together with weaker monsoon
-rainfall, and the most promising recharge sites lie on gentle to moderate slopes in the
-populated foothills. Taken together, the studies move from quantity to quality to spatial
-planning, but none of them joins all three. The main gaps are single-year chemical data, a
-lack of isotopic and observation-well records, partial circularity in map validation and
-little socio-economic appraisal. An integrated quantity--quality--space framework is
-proposed to guide springshed-based recharge planning in the region.
+This paper reviews three groundwater studies from the Beas catchment in Himachal Pradesh. Two of
+them deal with the Suketi river basin in Mandi district: one describes the groundwater resource and
+proposes a development plan, and the other reports the chemistry of groundwater sampled in May and
+November 2009. The third study maps groundwater potential in the Gaj watershed of Kangra district
+for 2010 and 2022 using GIS and the analytic hierarchy process, and selects sites for recharge
+structures. In the Suketi basin, most of the usable groundwater lies in the alluvium of the Balh
+valley, where only about 22\% of the assessed resource is in use. The hills depend on small springs,
+many of which almost stop flowing before the monsoon. The water is of Ca--HCO\textsubscript{3} type and
+is fit for drinking and irrigation, except for high fluoride (4.2~mg/L) in one bore well on granite
+and raised nitrate in two towns. In the Gaj watershed, the area of very high potential became smaller
+between 2010 and 2022 as monsoon rainfall weakened. The three studies cover quantity, quality and
+site selection separately, and none of them links all three. We point out the main gaps in data
+and method, and suggest a simple combined approach for future work.
 \par\vspace{5pt}
-\noindent\textbf{Keywords:} Mountain aquifers, Springs, Hydrochemistry, Groundwater potential
-zones, Analytic hierarchy process, Artificial recharge, Himachal Himalaya.
+\noindent\textbf{Keywords:} Groundwater, Springs, Water quality, Groundwater potential, Artificial
+recharge, Himachal Himalaya.
 \vspace{4pt}
 \end{minipage}}
 \vspace{14pt}
@@ -144,382 +135,114 @@ zones, Analytic hierarchy process, Artificial recharge, Himachal Himalaya.
 % =====================================================================
 \section{Introduction}
 
-India draws more groundwater than any other country, and a large part of its drinking
-water and irrigation supply now depends on wells rather than on surface storage. Satellite
-gravity records have shown sustained loss of groundwater storage across northern India
-\citep{rodell2009}, and global budgeting suggests that the abstraction from several major
-aquifers already exceeds what natural recharge can replace \citep{gleeson2012}. The
-National Water Policy therefore asks that groundwater be planned at the scale of the
-hydrological unit, with quantity, quality and environmental needs considered together
-\citep{mowr2002}.
+Groundwater supplies a large share of the drinking and irrigation water used in India, and
+storage has been falling in many northern states \citep{rodell2009}. In the hills of the Himalaya,
+the situation is different from the plains. Villages and small towns take their water from
+springs, shallow dug wells and hand-pump bore wells. These sources are fed by small aquifers in
+weathered and fractured rock, and steep slopes send much of the rain away as runoff. Several
+studies have reported falling spring discharge in the region \citep{valdiya1989,niti2018}.
 
-The Himalaya is often called the water tower of Asia, because its snow, ice and monsoon
-rain feed the great river systems downstream \citep{immerzeel2010}. Within the mountains,
-however, settlements in the middle hills seldom use those large rivers directly. They rely
-on springs, shallow dug wells, hand-pump bore wells and a range of traditional structures
-that tap small, fractured and strongly compartmentalised aquifers. Reports of falling spring
-discharge go back more than three decades in the Kumaun Himalaya \citep{valdiya1989}, and a
-national working group estimated that a large share of Himalayan springs are drying or
-becoming seasonal \citep{niti2018}. Field experiments in Sikkim have shown that targeted
-recharge in the spring catchment can restore flow \citep{tambe2012}, but such work needs
-basic knowledge of where water enters the ground, how it moves along structures, and how
-good it is once it emerges.
+Groundwater in the hills is also poorly measured. In Himachal Pradesh, official resource
+estimates are made only for valley areas, so the hill tracts, which cover most of the state, are
+not assessed \citep{cgwb2006}. At the same time, demand is rising in the foothill districts because
+of population growth, tourism and farming.
 
-Hard-rock hill tracts are also difficult to assess with the standard methods used on the
-plains. Steep slopes push most rainfall into fast runoff, thrusts and fractures make
-aquifers patchy, and the observation network is thin. In Himachal Pradesh, official
-groundwater resources are computed only for the valley areas; the hills, which make up most
-of the land, are not quantified \citep{cgwb2006,pophare2015}. Meanwhile, population, tourism
-and irrigated farming are expanding in the foothill districts of Mandi and Kangra.
-
-Against this background, three studies from the Beas catchment offer an instructive
-contrast. \citet{pophare2015} described the groundwater regime of the Suketi river basin and
-proposed separate development plans for its central valley and surrounding hills.
-\citet{pophare2018} examined the chemistry of groundwater and river water in the same basin
-across the pre- and post-monsoon seasons of 2009. \citet{sharma2025} used remote sensing, GIS
-and the analytic hierarchy process (AHP) to map groundwater potential in the Gaj watershed
-for 2010 and 2022 and to select sites for artificial recharge. The three works therefore
-apply field hydrogeology, hydrochemistry and geospatial decision analysis to neighbouring
-Lesser and Outer Himalayan catchments, and together they span data collected between 2009
-and 2022.
-
-No synthesis of these studies is available. The present review aims to: (i) compare their
-settings, data and methods; (ii) bring together their findings on groundwater occurrence,
-quality, temporal change and recharge; (iii) evaluate the strengths and weaknesses of each
-approach; and (iv) identify research gaps and outline an integrated framework for
-groundwater management in similar Himalayan watersheds.
+Three studies from the Beas catchment address parts of this problem.
+\citet{pophare2015} described the groundwater resource of the Suketi river basin and proposed
+separate plans for its valley and its hills. \citet{pophare2018} studied the chemistry of
+groundwater in the same basin. \citet{sharma2025} mapped groundwater potential in the Gaj
+watershed and chose sites for artificial recharge. This review compares the three studies, brings
+their main results together and identifies what is still missing. Each paper was read in full,
+and its setting, data, methods, results and recommendations were noted. Values that we
+calculated from the published data are marked as derived.
 
 % =====================================================================
-\section{Approach of the Review}
+\section{Study Areas and Methods}
 
-The review follows a structured comparative design (Fig.~\ref{fig:workflow}). The three
-studies were chosen because they share a regional setting (tributary catchments of the Beas
-river in Himachal Pradesh), address complementary parts of the groundwater problem, and
-report their data in enough detail to allow quantitative comparison. Each paper was read in
-full, and information was extracted under six themes: physical setting; data sources and
-sampling design; analytical methods; groundwater occurrence and potential; water quality;
-and management or recharge proposals. Numerical results were taken from the text and tables
-of the source papers. Where the present review derives additional indicators, such as
-percentage changes between years or shares of wells in a depth class, these are stated as
-derived values. The extracted material was then examined for agreement, contrast and
-missing elements, which form the basis of the discussion and of the framework proposed
-at the end.
-
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}[
-  font=\footnotesize,
-  box/.style={draw=accent,rounded corners=2pt,fill=accent!6,align=center,
-              minimum height=7mm,text width=24mm,inner sep=2pt},
-  wide/.style={draw=accent,rounded corners=2pt,fill=accent!14,align=center,
-               minimum height=7mm,text width=78mm,inner sep=2pt},
-  arr/.style={-{Stealth[length=2mm]},thick,accent}]
-  \node[box] (a) {Pophare \&\\Balpande (2015)\\[1pt]\textit{resource}};
-  \node[box,right=2mm of a] (b) {Pophare et al.\\(2018)\\[1pt]\textit{quality}};
-  \node[box,right=2mm of b] (c) {Sharma et al.\\(2025)\\[1pt]\textit{spatial planning}};
-  \node[wide,below=5mm of b] (d) {Data extraction under six themes: setting, data,
-        methods, occurrence, quality, management};
-  \node[wide,below=4mm of d] (e) {Comparative synthesis: agreement, contrast and
-        derived indicators};
-  \node[wide,below=4mm of e] (f) {Critical appraisal of methods and identification of gaps};
-  \node[wide,below=4mm of f,fill=barB!20,draw=barB] (g) {Integrated quantity--quality--space
-        framework and research priorities};
-  \draw[arr] (a.south) -- ++(0,-2.2mm) -| ([xshift=-20mm]d.north);
-  \draw[arr] (b.south) -- (d.north);
-  \draw[arr] (c.south) -- ++(0,-2.2mm) -| ([xshift=20mm]d.north);
-  \draw[arr] (d) -- (e);
-  \draw[arr] (e) -- (f);
-  \draw[arr] (f) -- (g);
-\end{tikzpicture}
-\caption{Workflow adopted for the comparative review.}
-\label{fig:workflow}
-\end{figure}
-
-% =====================================================================
-\section{Profile of the Reviewed Studies}
-
-Table~\ref{tab:profile} sets out the main features of the three studies. They differ in
-publication type, in the period they represent and, most of all, in the question each one
-asks. The first is a broad hydrogeological account built on field inventory; the second is a
-focused chemical survey; the third is a model-based spatial analysis that relies mostly on
-satellite and secondary data.
+Table~\ref{tab:overview} summarises the two catchments and the three studies.
 
 \begin{table*}[t]
 \centering
-\caption{Profile of the three studies reviewed.}
-\label{tab:profile}
+\caption{Study areas and methods of the three reviewed studies.}
+\label{tab:overview}
 \small
-\begin{tabularx}{\textwidth}{@{}P{2.9cm}LLL@{}}
+\begin{tabularx}{\textwidth}{@{}P{2.7cm}LLL@{}}
 \toprule
-\textbf{Attribute} & \textbf{\citet{pophare2015}} & \textbf{\citet{pophare2018}} & \textbf{\citet{sharma2025}}\\
+& \textbf{\citet{pophare2015}} & \textbf{\citet{pophare2018}} & \textbf{\citet{sharma2025}}\\
 \midrule
-Type of publication & Book chapter (\textit{Frontiers of Earth Science}) & Journal article (\textit{Journal of Geosciences Research}) & Journal article (\textit{Discover Sustainability})\\
-Study area & Suketi river basin, Mandi district & Suketi river basin, Mandi district & Gaj watershed, Kangra district\\
-Period of data & Field seasons of 2009; resource data as on March 2004 & May and November 2009 & 2010 and 2022 (pre- and post-monsoon); climate series 2010--2023\\
-Central question & How much groundwater is there, where, and how should it be developed? & Is the water fit for drinking and irrigation, and what controls its chemistry? & Where is groundwater potential highest, how has it changed, and where should recharge structures go?\\
-Core data & 28 dug wells, 64 tube wells, 93 springs, bore wells; thematic and morphometric maps & 31 groundwater and 5 river samples; 14 parameters & 12.5~m DEM, LISS-IV imagery, FAO soils, IMD/CGWB rainfall, temperature, geology\\
-Main tools & Well and spring inventory, water-level contouring, morphometry, runoff formulae, watershed delineation & Ionic ratios, correlation, Schoeller, Piper and Gibbs plots, drinking and irrigation indices & VIF screening, AHP weighting, weighted overlay, ROC--AUC, infiltration index, site overlay\\
-Principal output & Separate development plans for valley and hills & Water-quality status and contamination hot spots & Groundwater potential maps and recharge site map\\
+Catchment & \multicolumn{2}{>{\raggedright\arraybackslash}p{9.5cm}}{Suketi river basin, Mandi district; $\sim$422~\kmsq{}; 760--2,890~m; rainfall $\sim$1,136~mm/yr} & Gaj watershed, Kangra district; $\sim$900~\kmsq{}; up to $\sim$4,500~m; rainfall $\sim$2,600~mm/yr\\
+Main aquifers & \multicolumn{2}{>{\raggedright\arraybackslash}p{9.5cm}}{Balh valley fill (79~\kmsq{}); fractured meta-sediments, granite and limestone in hills} & Southern alluvium and Siwalik units; Chail rocks and Dhauladhar granite\\
+Aim & Assess the resource and plan its development & Assess water quality and its controls & Map groundwater potential and select recharge sites\\
+Data & 28 dug wells, 64 tube wells, 93 springs (2009); thematic maps & 31 groundwater and 5 river samples, May and Nov.\ 2009 & Satellite DEM and imagery, soil, rainfall and temperature data (2010, 2022)\\
+Methods & Field inventory, water-level maps, morphometry, runoff estimates & Ion analysis, Piper and Gibbs plots, drinking and irrigation indices & Collinearity test, AHP weights, weighted overlay, ROC--AUC check\\
 \bottomrule
 \end{tabularx}
 \end{table*}
 
-% =====================================================================
-\section{Physical Setting of the Study Areas}
+The Suketi basin has a central valley, the Balh valley, which holds up to about 370~m of
+Quaternary gravel, sand and clay. The valley lies between the Mandi thrust and the Main Central
+Thrust, and is surrounded by hills of older meta-sedimentary rocks, granite and limestone
+\citep{srikantia1998}. The Gaj watershed is larger, higher and much wetter. Its southern part has
+alluvium and Siwalik sediments, while the north and east are made of hard rocks. It is crossed by
+the Main Boundary Thrust and several other thrusts \citep{kumar2001}. Both catchments therefore
+have one porous aquifer with good storage and a much larger area of fractured hard rock.
 
-\subsection{Suketi River Basin}
-
-The Suketi river joins the Beas near Mandi and drains an elongated basin of about 422~\kmsq{}
-between Mandi in the north and Sundernagar in the south (31\textdegree27$'$--31\textdegree45$'$N;
-76\textdegree48$'$--77\textdegree03$'$E). Its most distinctive feature is the Balh valley, an
-intermontane basin of about 79~\kmsq{} (roughly 19\% of the catchment) lying near 790~m above
-mean sea level. The valley is filled with up to about 370~m of Quaternary boulders, gravel,
-sand, silt and clay, and it is bounded by the Mandi thrust and the Main Central Thrust
-\citep{srikantia1998,pophare2018}. The surrounding hills cover about 343~\kmsq{} and rise from
-800~m to nearly 2,900~m. They expose the Dhauladhar granite, Proterozoic meta-sediments of the
-Shali, Sundernagar and Salkhala groups, and Cenozoic rocks of the Subathu and Siwalik groups.
-
-Mandi district receives about 1,136~mm of rain in an average year, mostly between July and
-September, and the higher peaks receive winter snow \citep{cgwb2006}. Morphometric analysis
-classed the basin as seventh order, with 1,671 stream segments, a drainage density of
-2.69~km/km\textsuperscript{2}, a basin relief of 2,130~m and a ruggedness number of 5.73
-\citep{pophare2014,pophare2015}. Its elongation ratio (0.80) and form factor (0.50) point to an
-elongated shape that delays peak runoff, which the authors regarded as a modest advantage for
-recharge.
-
-\subsection{Gaj Watershed}
-
-The Gaj watershed lies in the Kangra valley, roughly between 32\textdegree00$'$--32\textdegree25$'$N
-and 76\textdegree00$'$--76\textdegree25$'$E, and drains about 900~\kmsq{} towards the Beas
-\citep{sharma2025}. Its upper reaches climb to about 4,500~m along the Dhauladhar range, and it
-receives far more precipitation than the Suketi basin, around 2,600~mm a year, with heavy
-monsoon rain on the southern slopes and snow at higher levels. Porous formations (recent
-alluvium in the south, and the Pinjore and Dhok Pathan units of the Siwalik group in the west)
-contrast with fissured hard rocks: the eastern Chail formation and, towards the north, the
-Dhauladhar granite. The area is crossed by the Main Boundary Thrust and by the Jawalamukhi, Drini,
-Panjal and Chail thrusts, and most springs follow these structures \citep{kumar2001,sharma2025}.
-
-\subsection{Comparison of Settings}
-
-Table~\ref{tab:setting} summarises the two settings. The Gaj watershed is about twice as large,
-reaches a much higher elevation and receives more than twice the rainfall of the Suketi basin.
-Both, however, combine a productive unconsolidated aquifer (the Balh valley fill and the
-southern Kangra alluvium) with large tracts of fractured hard rock where groundwater is
-stored in weathered zones, joints and faults. This shared two-part structure is the key to
-comparing the studies.
-
-\begin{table}[t]
-\centering
-\caption{Physical setting of the two catchments (compiled from \citealp{pophare2015,pophare2018,sharma2025}).}
-\label{tab:setting}
-\footnotesize
-\begin{tabularx}{\columnwidth}{@{}P{1.65cm}LL@{}}
-\toprule
-\textbf{Feature} & \textbf{Suketi basin} & \textbf{Gaj watershed}\\
-\midrule
-District & Mandi & Kangra\\
-Area & $\sim$422~\kmsq{} & $\sim$900~\kmsq{}\\
-Elevation & 760--2,890~m & foothills to $\sim$4,500~m\\
-Rainfall & $\sim$1,136~mm/yr & $\sim$2,600~mm/yr\\
-Tectonic frame & Between Mandi thrust and MCT & MBT and several thrusts\\
-Porous aquifer & Balh valley fill (79~\kmsq{}) & Southern alluvium, Siwalik units\\
-Hard-rock aquifer & Meta-sediments, granite, limestone & Chail formation, Dhauladhar granite\\
-Main abstraction & Dug and tube wells (valley); springs and bore wells (hills) & Springs, hand pumps, \textit{bowris}\\
-\bottomrule
-\end{tabularx}
-\end{table}
+The three studies used very different methods. \citet{pophare2015} relied on field work: they
+measured water levels in dug wells before and after the monsoon, collected tube-well records,
+visited springs and classed them by discharge after \citet{meinzer1923}, and divided the basin into
+53 small watersheds for planning. \citet{pophare2018} analysed 14 parameters in each sample
+following \citet{apha1998} and judged the results against drinking-water limits and standard
+irrigation indices \citep{richards1954}. \citet{sharma2025} built eleven map layers, removed
+strongly related layers using the variance inflation factor, gave weights to the remaining layers
+with the analytic hierarchy process \citep{saaty1980} and combined them by weighted overlay. They
+made four maps (before and after the monsoon in 2010 and in 2022) by changing only the rainfall
+layer, and checked the maps with the area under the ROC curve.
 
 % =====================================================================
-\section{Comparison of Methods}
+\section{Results of the Reviewed Studies}
 
-\subsection{Field Hydrogeological Appraisal}
+\subsection{Where the Groundwater Is}
 
-\citet{pophare2015} built their account on a 1:50,000 base map prepared from Survey of India
-toposheets. In the valley, 28 dug wells were set up as key observation wells and measured in
-May and November 2009; the depth to water level was contoured, and records of 64 tube wells
-were collected from the Irrigation and Public Health Department. In the hills, 93 springs were
-visited and described by type, host rock and discharge, and their size was rated on the
-classification of \citet{meinzer1923}. Thematic maps of geology, drainage, soils, land use,
-lineaments and slope were prepared, and stream ordering followed \citet{strahler1957}. The
-basin was then divided into 53 micro-watersheds within five sub-basins to serve as planning
-units. Harvestable runoff was estimated using three empirical approaches (Strange's
-coefficients, Binnie's percentages and the Inglis formula), and the lowest result was retained
-for recharge planning. Resource figures for the valley were taken from official estimates
-\citep{cgwb2006}.
+\subsubsection{Suketi valley}
+In the Balh valley, dug wells up to about 15~m deep tap an unconfined aquifer, and tube wells,
+mostly 50--125~m deep, tap layers of sand and gravel below clay \citep{pophare2015}. Some tube
+wells flow on their own at the surface. Most tube wells yield 9--45~\lps{}. In 2009 the water
+table was within 12~m of the surface before the monsoon and within 10~m after it, and 27 of the 28
+observation wells changed by less than 2~m between seasons. In more than half of the wells the
+water stood within 4~m of the surface.
 
-\subsection{Hydrochemical Survey}
+The net annual groundwater available in the valley was estimated at 3.48~\Mm{}, while use was
+only 0.78~\Mm{}, so the stage of development was about 22\% \citep{cgwb2006}. The valley aquifer is
+therefore under-used and could supply more water if pumping is planned with care.
 
-\citet{pophare2018} collected 31 groundwater samples in each of the two seasons of 2009: five
-from dug wells and six from tube wells in the valley, and thirteen from springs and seven from
-bore wells in the hills. Five river samples were added for comparison. pH, electrical
-conductivity (EC) and total dissolved solids (TDS) were recorded on site, and the major
-ions, hardness, nitrate and fluoride were determined following standard methods
-\citep{apha1998}. The results were interpreted with a correlation matrix, the classification of
-\citet{schoeller1967}, the trilinear diagram of \citet{piper1944}, chloro-alkaline indices and
-the diagram of \citet{gibbs1970}. Suitability for drinking was judged against national and
-international limits; suitability for irrigation was judged with a set of indices
-(Eqs.~\ref{eq:sar}--\ref{eq:pi}, all concentrations in meq/L) and the salinity diagram of
-\citet{richards1954}:
-\begin{align}
-\mathrm{SAR} &= \frac{\mathrm{Na}}{\sqrt{(\mathrm{Ca}+\mathrm{Mg})/2}} \label{eq:sar}\\[2pt]
-\%\mathrm{Na} &= \frac{\mathrm{Na}+\mathrm{K}}{\mathrm{Ca}+\mathrm{Mg}+\mathrm{Na}+\mathrm{K}}\times 100 \label{eq:pna}\\[2pt]
-\mathrm{RSC} &= (\mathrm{HCO_3}+\mathrm{CO_3})-(\mathrm{Ca}+\mathrm{Mg}) \label{eq:rsc}\\[2pt]
-\mathrm{KR} &= \frac{\mathrm{Na}}{\mathrm{Ca}+\mathrm{Mg}} \label{eq:kr}\\[2pt]
-\mathrm{PI} &= \frac{\mathrm{Na}+\sqrt{\mathrm{HCO_3}}}{\mathrm{Ca}+\mathrm{Mg}+\mathrm{Na}}\times 100 \label{eq:pi}
-\end{align}
-Soluble sodium percentage, magnesium ratio and corrosivity ratio were also computed, together
-with the Collins ratio as a drinking-water indicator.
+\subsubsection{Suketi hills}
+The hills are much poorer in groundwater. Most of the 93 springs studied are fracture or
+depression springs. In May 2009 many were dry or gave less than 0.01~\lps{}, and in November most
+gave only 0.1--0.4~\lps{}. On Meinzer's scale, most belong to the three smallest classes (VI to
+VIII). Only a few springs linked to limestone or major faults, near Nalni, Nagchalla and Mandi,
+gave more than 10~\lps{}. The drainage network is dense and fine, which means that rain leaves the
+slopes quickly \citep{pophare2014}. The authors identified three slope belts: hills steeper than
+10\textdegree{} that mostly shed water, a foot-hill belt of 5--10\textdegree{} that is the main
+recharge zone, and the flat valley floor where groundwater comes out.
 
-\subsection{Geospatial Multi-criteria Analysis}
-
-\citet{sharma2025} prepared eleven factor maps (aspect, curvature, drainage density, geology,
-lineament density, land use/land cover, rainfall, soil, slope, stream order and temperature)
-from a 12.5~m ALOS PALSAR elevation model, LISS-IV imagery, FAO soil data and Indian
-Meteorological Department records. The land-use map reached an overall accuracy of 86.3\% and a
-kappa coefficient of 0.84. Collinearity among predictors was checked with the variance
-inflation factor (VIF),
-\begin{equation}
-\mathrm{VIF}_i=\frac{1}{1-R_i^{2}},
-\label{eq:vif}
-\end{equation}
-where $R_i^2$ is obtained by regressing factor $i$ on the others. All retained layers had VIF
-values between 1.88 and 3.65, below the commonly used limit of 5, although such cut-offs should
-be applied with care \citep{obrien2007}. Layer and class weights were then derived by pairwise
-comparison \citep{saaty1980}, with the consistency of each matrix checked through
-\begin{equation}
-\mathrm{CR}=\frac{\mathrm{CI}}{\mathrm{RI}},\qquad \mathrm{CI}=\frac{\lambda_{\max}-n}{n-1},
-\label{eq:cr}
-\end{equation}
-where $\lambda_{\max}$ is the principal eigenvalue, $n$ the number of criteria and RI the random
-index; matrices were accepted when CR was below 0.1. The groundwater potential index of each
-cell was obtained by weighted overlay,
-\begin{equation}
-\mathrm{GWPI}_i=\sum_{j=1}^{n} w_j\, r_{ij},
-\label{eq:gwpi}
-\end{equation}
-where $w_j$ is the weight of factor $j$ and $r_{ij}$ the rating of its class at cell $i$
-\citep{malczewski2006}. Four maps were produced (pre- and post-monsoon for 2010 and 2022) by
-changing only the rainfall layer, and each was split into five classes using natural breaks.
-Accuracy was tested with the area under the receiver operating characteristic curve
-\citep{fawcett2006}. A separate infiltration-capacity index was built from soil, slope,
-temperature, land use and curvature (CR = 0.072) and cross-tabulated with the potential maps.
-Candidate recharge points were placed at intersections of lineaments with the drainage network
-and filtered by slope, land use and groundwater potential.
-
-\subsection{Methodological Contrasts}
-
-The three approaches sit at different points on a scale from direct observation to inference.
-The Suketi studies are grounded in measurements at wells and springs but extend those
-measurements across the basin only qualitatively. The Gaj study covers every cell of the
-watershed in a consistent way but depends on expert weights and on proxies for the subsurface.
-Field inventories capture what is actually happening at a source; index models capture where
-conditions favour storage and recharge. Neither is sufficient alone, and the two are best seen
-as partners: point data can calibrate and test the maps, and the maps can guide where new
-points should be measured.
-
-% =====================================================================
-\section{Synthesis of Findings}
-
-\subsection{Groundwater Occurrence and Resource Potential}
-
-\subsubsection{Valley aquifers}
-In the Balh valley, dug wells no deeper than about 15~m tap a phreatic aquifer, while tube
-wells, mostly 50--125~m deep (recorded range about 27--135~m), draw from layered sand, gravel and boulder horizons separated from
-the shallow zone by clay \citep{pophare2015}. Some tube wells flow freely at the surface,
-showing confined conditions. Reported yields of tube wells range from about 5.5 to 84~\lps{},
-with most between 9 and 45~\lps{}. In 2009 the water table stood within 12~m of the surface
-before the monsoon and within 10~m after it, and 27 of the 28 observation wells (96\%) changed by
-less than 2~m between seasons (Table~\ref{tab:valley}). By derived count, about 54\% of wells in
-May and 61\% in November had water levels shallower than 4~m, and 21--36\% were shallower than
-2~m, which indicates a tendency to waterlogging in parts of the valley.
-
-According to official estimates as on March 2004, the net annual groundwater availability of
-the valley was 3.48~\Mm{} against an annual draft of 0.78~\Mm{}, giving a stage of development
-of about 22\% \citep{cgwb2006,pophare2015}. A stage this low means that the valley aquifer is
-under-used rather than stressed, and it could support further, carefully planned abstraction.
-
-\begin{table}[t]
-\centering
-\caption{Distribution of the 28 observation dug wells of the Balh valley by depth to water
-level in 2009 (from \citealp{pophare2015}).}
-\label{tab:valley}
-\footnotesize
-\begin{tabularx}{\columnwidth}{@{}lCC@{}}
-\toprule
-\textbf{Depth class (m bgl)} & \textbf{May 2009} & \textbf{Nov. 2009}\\
-\midrule
-0--2 & 6 (21\%) & 10 (36\%)\\
-2--4 & 9 (32\%) & 7 (25\%)\\
-4--8 & 9 (32\%) & 7 (25\%)\\
-$>$8 & 4 (15\%) & 4 (14\%)\\
-\midrule
-Seasonal change $<$2~m & \multicolumn{2}{c}{27 wells (96\%)}\\
-\bottomrule
-\end{tabularx}
-\end{table}
-
-\subsubsection{Hill aquifers and springs}
-The hills of the Suketi basin present a very different picture. Groundwater is held in thin
-weathered mantles and in fractures, and it reaches people through springs and through bore
-wells of about 50--70~m depth fitted with hand pumps \citep{pophare2015}. Most of the 93 springs
-inventoried are fracture or depression springs in sandstone, phyllite or boulder beds. In May
-2009 many of them were dry or produced less than 0.01~\lps{}, and in November most yielded only
-about 0.1--0.4~\lps{}; on Meinzer's scale the majority fall in magnitudes VI to VIII. A handful of
-springs linked to limestone solution features or major structures, such as those near Nalni,
-Nagchalla and Mandi, flow at more than 10~\lps{}. The authors also noted that many fracture
-springs revive only briefly after the monsoon, which points to small storage and fast drainage.
-
-Morphometry supports this reading. The very fine drainage texture (14.88) and high
-infiltration number (10.66) indicate a landscape that sheds water quickly
-\citep{pophare2014}. Slope zoning separates three belts: hills steeper than 10\textdegree{} that
-act mainly as runoff zones, a piedmont belt of 5--10\textdegree{} that serves as the main recharge
-zone, and the valley floor below 5\textdegree{} where groundwater discharges \citep{pophare2015}.
-
-\subsubsection{Groundwater potential in the Gaj watershed}
-In the Gaj watershed, moderate to very high potential is concentrated along the major thrusts
-and lineaments and over the southern alluvium, while steep northern slopes score low
-\citep{sharma2025}. Table~\ref{tab:gwp} and Fig.~\ref{fig:gwp} give the class areas. The very
-high class shrank from 4.20\% to 2.63\% of the area in the pre-monsoon maps and from 4.46\% to
-3.20\% in the post-monsoon maps between 2010 and 2022, a relative decline of about 37\% and 28\%,
-respectively (derived). The high class changed much less. In the post-monsoon maps, the low and
-very low classes together fell from 33.8\% to 26.5\%, while the moderate class expanded, so the
-distribution became more concentrated in the middle classes. The authors reported AUC values of
-0.82 and 0.81, and found more than 90\% agreement between the high classes of the potential and
-infiltration maps.
-
-\begin{table}[t]
-\centering
-\caption{Share of the Gaj watershed (\%) in each groundwater potential class (from
-\citealp{sharma2025}); $\Delta$ is the change from 2010 to 2022 in percentage points (derived).}
-\label{tab:gwp}
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\begin{tabular}{@{}lrrrrrr@{}}
-\toprule
-& \multicolumn{3}{c}{\textbf{Pre-monsoon}} & \multicolumn{3}{c}{\textbf{Post-monsoon}}\\
-\cmidrule(lr){2-4}\cmidrule(l){5-7}
-\textbf{Class} & 2010 & 2022 & $\Delta$ & 2010 & 2022 & $\Delta$\\
-\midrule
-Very high & 4.20 & 2.63 & $-1.57$ & 4.46 & 3.20 & $-1.26$\\
-High & 37.90 & 37.08 & $-0.82$ & 33.77 & 37.76 & $+3.99$\\
-Moderate & 24.16 & 27.15 & $+2.99$ & 27.98 & 32.49 & $+4.51$\\
-Low & 31.84 & 31.87 & $+0.03$ & 30.67 & 25.65 & $-5.02$\\
-Very low & 1.90 & 1.27 & $-0.63$ & 3.13 & 0.89 & $-2.24$\\
-\bottomrule
-\end{tabular}
-\end{table}
+\subsubsection{Gaj watershed}
+In the Gaj watershed, zones of moderate to very high potential follow the main thrusts and
+lineaments and the southern alluvium, while the steep northern slopes score low
+\citep{sharma2025}. Fig.~\ref{fig:gwp} shows the share of the area in each class. The
+very high class fell from 4.20\% to 2.63\% of the area before the monsoon and from 4.46\% to 3.20\%
+after it. The maps scored AUC values of 0.82 and 0.81, which is usually read as good accuracy.
 
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}
 \begin{axis}[
-  width=\columnwidth, height=5.4cm,
+  width=\columnwidth, height=5.2cm,
   ybar, bar width=4.2pt,
   ymin=0, ymax=42,
   ylabel={Area (\%)}, ylabel style={font=\footnotesize},
   symbolic x coords={Very high,High,Moderate,Low,Very low},
   xtick=data, tick label style={font=\footnotesize},
-  legend style={font=\scriptsize,at={(0.98,0.97)},anchor=north east,legend columns=2,draw=none,fill=none},
+  legend style={font=\scriptsize,at={(0.5,-0.2)},anchor=north,legend columns=4,draw=none,fill=none},
   enlarge x limits=0.13,
   axis lines*=left, ymajorgrids, grid style={gray!25}]
 \addplot[fill=barA!55,draw=barA] coordinates {(Very high,4.20) (High,37.90) (Moderate,24.16) (Low,31.84) (Very low,1.90)};
@@ -529,377 +252,184 @@ Very low & 1.90 & 1.27 & $-0.63$ & 3.13 & 0.89 & $-2.24$\\
 \legend{Pre 2010, Pre 2022, Post 2010, Post 2022}
 \end{axis}
 \end{tikzpicture}
-\caption{Groundwater potential class areas in the Gaj watershed, plotted from the values
-reported by \citet{sharma2025}.}
+\caption{Groundwater potential classes in the Gaj watershed, drawn from the data of
+\citet{sharma2025}.}
 \label{fig:gwp}
 \end{figure}
 
-\subsubsection{Common controls}
-Although the methods differ, both catchments point to the same controls. Structures (thrusts,
-faults and lineaments) concentrate both springs and high potential; slope decides whether rain
-runs off or infiltrates; and unconsolidated valley fill or alluvium forms the only aquifer with
-appreciable storage. The Suketi work reaches these conclusions from field observation, while
-the Gaj work expresses them as factor weights. The agreement between two independent lines of
-evidence gives confidence that these controls are general for the Lesser and Outer Himalaya of
-the region.
+The two catchments point to the same controls even though the methods differ. Faults, thrusts and
+lineaments guide both spring locations and high-potential zones. Slope decides whether rain soaks
+in or runs off. Valley fill and alluvium are the only aquifers with large storage.
 
-\subsection{Groundwater Quality}
+\subsection{Water Quality}
 
-Water quality was examined only in the Suketi basin \citep{pophare2018}. The key outcomes are
-summarised in Table~\ref{tab:quality}.
+Only the Suketi basin has chemical data \citep{pophare2018}. The main results are listed in
+Table~\ref{tab:quality}. All waters are slightly alkaline and have low salt content. Conductivity
+was highest in dug wells (582~\uScm{} in May) and lowest in springs (350~\uScm{}), and every source
+was more dilute after the monsoon. Calcium and bicarbonate are the main ions, so most samples
+plot as Ca--\ce{HCO3} water on the Piper diagram \citep{piper1944}. On the Gibbs diagram most
+samples fall in the rainfall-dominated field \citep{gibbs1970}. This suggests that water passes
+through the steep terrain quickly and has little time to react with the rock. Spring water and
+river water have almost the same ionic make-up, which indicates that hill springs feed the base
+flow of the Suketi river.
 
-\subsubsection{Mineralisation and facies}
-All waters are slightly alkaline, with mean pH between about 7.3 and 7.9, and their
-mineral content is low. Mean EC follows the order dug wells $>$ bore wells $>$ tube wells $>$ river
-water $>$ springs in both seasons, and every source is more dilute after the monsoon
-(Fig.~\ref{fig:ec}). Bicarbonate is the dominant anion and calcium the dominant cation, followed
-by magnesium and sodium; total hardness stays below 300~\mgl{} and is mainly of the carbonate
-(temporary) kind. On the Piper diagram most samples plot as Ca--\ce{HCO3} water, in which alkaline
-earths exceed alkalis and weak acids exceed strong acids. Strong correlations of calcium and
-magnesium with bicarbonate point to carbonate and silicate weathering as a shared source
-\citep{hem1985}.
-
-\begin{figure}[t]
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-  width=\columnwidth, height=5.2cm,
-  ybar, bar width=7pt,
-  ymin=0, ymax=650,
-  ylabel={Mean EC ($\mu$S/cm)}, ylabel style={font=\footnotesize},
-  symbolic x coords={Dug wells,Bore wells,Tube wells,River,Springs},
-  xtick=data, tick label style={font=\footnotesize},
-  nodes near coords, every node near coord/.append style={font=\tiny,rotate=90,anchor=west},
-  legend style={font=\scriptsize,at={(0.98,0.97)},anchor=north east,draw=none,fill=none},
-  enlarge x limits=0.13,
-  axis lines*=left, ymajorgrids, grid style={gray!25}]
-\addplot[fill=barA,draw=barA] coordinates {(Dug wells,582) (Bore wells,506) (Tube wells,450) (River,384) (Springs,350)};
-\addplot[fill=barB,draw=barB] coordinates {(Dug wells,450) (Bore wells,399) (Tube wells,397) (River,344) (Springs,296)};
-\legend{May 2009, Nov. 2009}
-\end{axis}
-\end{tikzpicture}
-\caption{Mean electrical conductivity by water source in the Suketi basin, plotted from the
-values reported by \citet{pophare2018}.}
-\label{fig:ec}
-\end{figure}
-
-\subsubsection{Controlling processes}
-On the Gibbs diagram most samples fall in the field of precipitation dominance and only a few
-show the influence of rock weathering. Combined with the low TDS, this suggests that recharge
-water moves quickly through the steep terrain and has little time to react with the rocks
-\citep{pophare2018}. The chloro-alkaline indices were positive in about 68\% of samples before
-the monsoon but in only 45\% after it, implying that fresh recharge temporarily shifts the
-balance of ion exchange. A further useful result is that spring water and river water have
-nearly identical ionic make-up, supporting the view that shallow hill aquifers sustain the
-base flow of the Suketi and its tributaries.
-
-\subsubsection{Contamination signals}
-Two local problems stand out. A bore well at Pabu, on granite, contained 4.2~\mgl{} fluoride in
-May and 2.2~\mgl{} in November, well above the 1.5~\mgl{} limit \citep{bis2012,who2017}; the
-authors attribute this to release from fluoride-bearing minerals during long contact with the
-host rock. Second, nitrate reached 36--37~\mgl{} in a spring at Mandi and 28--32~\mgl{} in a bore
-well at Rewalsar, far above the values found at most other sites. These levels are
-below the 45~\mgl{} limit, but their location in crowded towns and their correlation with
-sulphate and potassium point to sewage and farm inputs. Such early signals deserve
-regular monitoring because nitrate tends to rise as settlements grow.
-
-\subsubsection{Suitability for irrigation}
-All irrigation indices fall in safe ranges (Table~\ref{tab:quality}). SAR is below 10 in every
-sample, and most samples plot in the C2--S1 class (medium salinity, low sodium hazard) of the
-salinity diagram \citep{richards1954}. Residual sodium carbonate is below 1.25~meq/L, Kelley's
-ratio is below 1, and the permeability index averages 58--67\%, which falls within the suitable
-classes of \citet{doneen1964}. The magnesium ratio exceeded 50 in nine samples before the
-monsoon but in only one afterwards. The main practical concern is the corrosivity ratio, which
-was above 1 in six samples in each season and could shorten the life of metal pipes in water
-supply schemes.
+Two local problems were found. A bore well at Pabu, on granite, had 4.2~\mgl{} fluoride in May and
+2.2~\mgl{} in November, above the limit of 1.5~\mgl{} \citep{bis2012,who2017}. The authors linked
+this to fluoride released from the granite. Nitrate reached 36--37~\mgl{} in a spring at Mandi and
+28--32~\mgl{} in a bore well at Rewalsar. These values are below the 45~\mgl{} limit, but both sites
+are in crowded towns, and nitrate is likely to come from sewage and farm runoff. For irrigation,
+all samples were safe on the sodium and carbonate indices. Six samples in each season were
+corrosive, which matters for metal pipes in supply schemes.
 
 \begin{table}[t]
 \centering
-\caption{Water-quality indicators for groundwater of the Suketi basin, 2009 (results from
-\citealp{pophare2018}).}
+\caption{Main water-quality results for the Suketi basin, 2009 \citep{pophare2018}.}
 \label{tab:quality}
 \footnotesize
-\begin{tabularx}{\columnwidth}{@{}P{1.55cm}P{1.75cm}L@{}}
+\begin{tabularx}{\columnwidth}{@{}P{1.7cm}P{1.6cm}L@{}}
 \toprule
-\textbf{Indicator} & \textbf{Criterion} & \textbf{Outcome}\\
+\textbf{Parameter} & \textbf{Limit} & \textbf{Result}\\
 \midrule
-pH & 6.5--8.5 & Mean 7.3--7.9; slightly alkaline\\
-Facies & Piper & Mainly Ca--\ce{HCO3}\\
-Fluoride & $\le$1.5~\mgl{} & One bore well 4.2/2.2~\mgl{}\\
-Nitrate & $\le$45~\mgl{} & All within limit; 28--37~\mgl{} at Mandi and Rewalsar\\
-Collins ratio & $\le$1 good & $<$1 in all samples\\
-SAR & $<$10 excellent & All samples\\
-\%Na & $\le$60 & Excellent in 84--90\%\\
-RSC & $<$1.25~meq/L & All samples safe\\
-Kelley's ratio & $<$1 & All samples\\
-Mg ratio & $<$50 & 9 samples (May), 1 (Nov.) exceed\\
-PI & Class I--II & Mean 58--67\%\\
-Corrosivity & $<$1 & 6 samples exceed per season\\
+pH & 6.5--8.5 & Mean 7.3--7.9\\
+Water type & -- & Mostly Ca--\ce{HCO3}\\
+Fluoride & 1.5~\mgl{} & Exceeded in one bore well (4.2~\mgl{})\\
+Nitrate & 45~\mgl{} & Within limit; 28--37~\mgl{} in two towns\\
+SAR & $<$10 & All samples\\
+Sodium (\%) & $\le$60 & Excellent in 84--90\% of samples\\
+RSC & $<$1.25~meq/L & All samples\\
+Corrosivity & $<$1 & Six samples above 1 in each season\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-\subsubsection{Relevance to the Gaj watershed}
-No chemical data are reported for the Gaj watershed. Yet the two areas share the same kinds
-of rock, including the Dhauladhar granite, and the same pressures from growing towns. The
-Suketi results therefore suggest that fluoride should be checked in granite-hosted wells and
-springs of the Gaj, and that nitrate should be watched in the foothill settlements that
-\citet{sharma2025} identified as priorities for recharge. This matters because a recharge
-structure built where runoff collects from roads, drains or farm land can carry pollutants
-into the very aquifer it is meant to protect.
+\subsection{Change over Time}
 
-\subsection{Temporal Behaviour and Climate Signal}
+The Suketi data come from one year (2009), so they show only the seasonal pattern. The Gaj study
+covers 2010 to 2022. Over this period, monsoon rainfall in the watershed was lower in several
+years, and the area of very high potential decreased \citep{sharma2025}. Government records quoted
+in that study show water-level falls of up to 7.16~m in the area, and 235 of the 4,535 hand pumps
+in the area needed repair or replacement, partly because of low water levels. Maximum temperature
+rose over the same period, and the population of Kangra district grew by about 12\% between 2011
+and 2023 (derived).
 
-The Suketi studies capture a single year and show only seasonal behaviour: modest water-level
-rise in the valley and strong post-monsoon dilution of the water. The Gaj study adds a decadal
-view. Monsoon rainfall in the watershed was markedly lower in several years after 2010, and the
-potential maps for 2022 show a smaller very high class \citep{sharma2025}. Official records cited
-in that study report water-table rises of up to 2.94~m and falls of up to 7.16~m in the area, a
-decadal water-level variation of about 6~m in Kangra, and 235 of 4,535 hand pumps in need of
-repair or abandonment, partly because of low water levels. Maximum temperature increased and
-minimum temperature decreased between 2010 and 2023, which may lengthen dry spells and raise
-evaporative demand. At the same time, the population of Kangra district grew from about 1.51
-million in 2011 to about 1.69 million in 2023, an increase of nearly 12\% (derived).
+These trends should be read with care. Rainfall was the only layer that changed between the 2010
+and 2022 maps, so the change in the maps reflects changed rainfall and not a measured change in
+groundwater storage.
 
-One caution applies. Because rainfall was the only layer that changed between the 2010 and
-2022 maps, the shift in potential classes reflects changed recharge conditions rather than a
-measured change in stored groundwater. The trend agrees with the official water-level records,
-which is encouraging, but it should not be read as a direct measurement of depletion.
+\subsection{Recharge and Management Proposals}
 
-\subsection{Management and Recharge Proposals}
+\citet{pophare2015} suggested separate plans for the valley and the hills. In the valley,
+well-designed dug wells can meet most local demand, recharge should be tried where post-monsoon
+water levels are deeper than about 3~m, and old village ponds should be cleaned and deepened. In the
+hills, they proposed about three check dams or gabions for each spring, roughly 282 structures in
+all, together with rooftop rainwater harvesting and farm ponds. Structures were matched to stream
+order, from gully plugs on small streams to check dams on larger ones \citep{cgwb2007}. They also
+asked for the revival of traditional systems such as \textit{baudis}, \textit{nauns} and
+\textit{kuhls} \citep{sharma2009}.
 
-Table~\ref{tab:manage} compares the management proposals. Both studies favour small, low-cost
-structures placed on low-order streams and gentle slopes, but they reach their recommendations
-in different ways.
+\citet{sharma2025} placed candidate sites where lineaments cross streams and kept only those on
+gentle or moderate slopes and suitable land. Priority was given to crowded foothill areas. They
+recommended check dams, gabions, contour trenches, pony-pit wells and roof-water tanks, and
+avoided steep slopes because of fast runoff and the risk of slope failure.
 
-\citet{pophare2015} argued that the valley and the hills need separate plans. For the valley,
-the low stage of development and shallow water levels mean that domestic and irrigation demand
-can be met from adequately sized dug wells; managed recharge is recommended where
-post-monsoon levels are deeper than about 3~m, and old village ponds could be desilted and
-deepened to store more water. For the hills, the authors recommend about three check dams or
-gabion structures (each roughly 15~m wide and 1.5~m high) for every spring, or around 282
-structures for the 94 springs counted in their plan, along with rooftop rainwater harvesting, farm ponds and
-small underground tanks. They also match structures to stream order: gully plugs and gabions on
-first- and second-order streams, nala bunds and percolation tanks on second- and third-order
-streams, and check dams or subsurface dykes on fourth- to seventh-order channels
-\citep{cgwb2007}. Harvestable runoff of the basin was estimated at 262--375~\Mm{} a year, which is
-about 75 times the assessed groundwater availability of the valley (derived), so water
-for recharge is not the limiting factor; the limiting factors are storage and suitable sites.
-Finally, they stress the revival of traditional systems such as \textit{baudis} (stone-lined
-spring pits), \textit{nauns} (covered spring tanks), \textit{chhrudus} (piped spring outlets) and
-\textit{kuhls} (gravity irrigation channels), many of which are falling into disuse
-\citep{sharma2009}.
-
-\citet{sharma2025} used a spatial filter instead of a rule of thumb. Candidate points at
-lineament--drainage intersections were kept only on low to moderate slopes and on suitable land
-uses, and were then ranked by the needs of populated foothill areas. The suggested structures
-include check dams, gabions, contour trenches, pony-pit wells, roof-water storage tanks and
-water-spreading weirs.
-Steep sites were rejected both because water runs off too quickly and because heavy structures
-might destabilise slopes, a practical point for a seismically active belt.
-
-Neither study estimates how much recharge the proposed structures would add, what they would
-cost, or who would own and maintain them. Experience with managed recharge shows that these
-questions largely decide whether a scheme succeeds \citep{bouwer2002}.
-
-\begin{table*}[t]
-\centering
-\caption{Comparison of management and recharge proposals.}
-\label{tab:manage}
-\small
-\begin{tabularx}{\textwidth}{@{}P{3.0cm}LL@{}}
-\toprule
-\textbf{Aspect} & \textbf{Suketi basin \citep{pophare2015}} & \textbf{Gaj watershed \citep{sharma2025}}\\
-\midrule
-Planning unit & 53 micro-watersheds in five sub-basins; valley and hills planned separately & Whole watershed; cells ranked by potential and infiltration\\
-Siting logic & Stream order, slope belt and spring location; micro-level surveys advised & Lineament--drainage intersections filtered by slope, land use and potential\\
-Recommended structures & Gully plugs, gabions, nala bunds, percolation tanks, check dams, subsurface dykes, rooftop harvesting, farm ponds, underground tanks & Check dams, gabions, contour trenches, pony-pit wells, roof-water storage tanks, water-spreading weirs\\
-Scale of intervention & About 282 check dams/gabions for spring revival & Strategic points mapped; number and size not fixed\\
-Traditional systems & Revival of \textit{baudi}, \textit{naun}, \textit{chhrudu} and \textit{kuhl} & Mentions \textit{bowris} as natural sources\\
-Priority areas & Spring catchments in hills; valley zones with deeper post-monsoon levels & Densely populated foothills with lower potential\\
-Not addressed & Recharge volumes, cost, water quality of recharge source & Field feasibility, cost--benefit, land ownership, water quality\\
-\bottomrule
-\end{tabularx}
-\end{table*}
+Both studies favour small, low-cost structures on small streams and gentle ground. Neither
+estimates how much water the structures would add, what they would cost, or who would maintain
+them. These points often decide whether recharge schemes work in practice \citep{bouwer2002}.
 
 % =====================================================================
 \section{Discussion}
 
-\subsection{How the Studies Complement Each Other}
-
-Read in order of publication, the three studies show a clear shift in method over a decade:
-from field-based descriptive hydrogeology, through process-oriented hydrochemistry, to
-data-driven spatial decision support. Each answers a question the others leave open. The
-resource study shows where water is stored and how it is used, but it cannot say whether the
-water is safe or how conditions vary across unsampled hills. The chemical study shows that the
-water is generally safe and that hill aquifers feed the rivers, but it says little about volume.
-The geospatial study covers the whole watershed and tracks change through time, but it has no
-direct measure of water levels or quality. A combined reading is therefore more useful for
-planning than any single paper.
-
-\subsection{Strengths and Limitations}
-
-Table~\ref{tab:appraisal} summarises the main strengths and weaknesses. Several points need
-emphasis.
-
-\textit{Temporal coverage.} Both Suketi data sets come from a single hydrological year (2009).
-Seasonal contrasts are captured, but year-to-year variability and long-term trends are not, and
-the data are now more than fifteen years old. The resource figures refer to 2004.
-
-\textit{Observation data.} In the Gaj study, the absence of observation-well records is
-acknowledged by the authors themselves. Without measured water levels or spring discharge, the
-potential maps remain hypotheses about where groundwater should be, rather than evidence of
-where it is.
-
-\textit{Subjectivity and validation.} AHP weights rest on expert judgement, and no sensitivity
-analysis was reported to show how the maps would change under different weights. The
-description of which layers entered the final overlay is also not fully consistent between
-sections of the paper. More importantly, the infiltration map used to cross-check the potential
-maps was built from five layers (soil, slope, temperature, land use and curvature) that also
-enter the potential model. A high level of agreement between the two maps is therefore partly
-expected and is not fully independent validation. Testing against measured spring discharge,
-well yields or water-level change would be much stronger \citep{machiwal2011,fawcett2006}.
-
-\textit{Analytical scope.} The chemical survey covers the major ions, nitrate and fluoride, but
-not trace metals, microbial quality or stable isotopes. Bacterial contamination of springs is a
-common health problem in hill towns, and isotopes of oxygen and hydrogen could identify the
-altitude and location of spring recharge areas, which is exactly the information needed to
-place recharge structures \citep{niti2018}. The drinking-water limits used in 2018 were also
-earlier editions of the current standards \citep{bis2012}.
-
-\textit{Resource accounting.} In the Suketi study, the hills were not quantified, and the
-recommended number of structures follows a uniform rule of three per spring rather than a water
-balance for each spring catchment. The runoff estimate itself varies by about 40\% between
-methods, and the rainfall used for it (1,350~mm) differs from the district average cited
-elsewhere (1,136~mm).
-
-\textit{Social dimension.} Both studies recognise the importance of local communities, but
-neither assesses land ownership, willingness to maintain structures, or costs and benefits.
-The Suketi study does, however, offer a rare record of traditional water systems, which could
-anchor community-based management \citep{sharma2009}.
+The three studies are useful together because each covers a different question. The first shows
+where water is stored and how much is used. The second shows that the water is mostly safe and
+that hill springs feed the rivers. The third covers the whole watershed in a consistent way and
+looks at change over twelve years. Table~\ref{tab:appraisal} lists the main strengths and
+weaknesses.
 
 \begin{table*}[t]
 \centering
-\caption{Strengths, limitations and principal gaps of the reviewed studies.}
+\caption{Strengths, limitations and main gaps of the reviewed studies.}
 \label{tab:appraisal}
 \small
-\begin{tabularx}{\textwidth}{@{}P{2.6cm}LLL@{}}
+\begin{tabularx}{\textwidth}{@{}P{2.4cm}LLL@{}}
 \toprule
 & \textbf{\citet{pophare2015}} & \textbf{\citet{pophare2018}} & \textbf{\citet{sharma2025}}\\
 \midrule
-Main strengths & Extensive field inventory of wells and springs; clear valley--hill contrast; watershed-level planning units; record of traditional systems & Two-season sampling of all source types; wide set of drinking and irrigation indices; spring--river link identified & Consistent basin-wide coverage; collinearity screening; decadal comparison; explicit siting of recharge points\\
-Main limitations & One year of data; hills not quantified; structure count based on a uniform rule; runoff estimates differ widely & One year of data; no trace metals, microbes or isotopes; few samples per source class; older standards & No observation wells; subjective weights without sensitivity test; partly circular validation; only rainfall varied in time\\
-Key gap & Water balance and recharge volumes for spring catchments & Long-term quality monitoring and source tracing & Field validation, water quality and socio-economic feasibility\\
+Strengths & Large field inventory of wells and springs; clear valley--hill contrast; planning by small watersheds & Both seasons and all source types sampled; full set of drinking and irrigation checks & Covers the whole watershed; compares two years; maps actual recharge sites\\
+Limitations & One year of data; hills not quantified; number of structures based on a fixed rule & One year of data; no trace metals, bacteria or isotopes & No well or spring data; weights depend on expert opinion; check map shares inputs with the model\\
+Main gap & Water budget of spring catchments & Long-term quality monitoring & Field validation and water-quality screening\\
 \bottomrule
 \end{tabularx}
 \end{table*}
 
-\subsection{Transferability Between the Two Catchments}
+Three weaknesses are shared or especially important. First, the Suketi data are from a single
+year and are now old. Second, the Gaj maps have no direct field check. The authors compared them
+with an infiltration map, but that map was built from five layers that were also used in the
+potential model, so close agreement is partly expected. Testing against spring flow or well
+levels would be stronger \citep{machiwal2011}. Third, no study looks at water quality and recharge
+together. The Suketi results show fluoride in granite and nitrate in towns. The Gaj study proposes
+recharge in crowded foothills and also has granite in its catchment, so recharge water there
+should be tested before structures are built.
 
-Because the two catchments share a similar structure, the methods could usefully be exchanged.
-The Suketi inventory of 93 springs and 28 observation wells is the kind of data set that the Gaj
-model lacks for validation; a similar inventory in the Gaj would greatly strengthen its
-conclusions. In the other direction, the AHP workflow could map potential across the Suketi
-hills, where official estimates are not made, and could help choose which of the 53
-micro-watersheds should receive recharge structures first. The Suketi chemistry, in turn,
-offers a baseline against which future surveys in either catchment can be compared.
+The methods could also be shared between the two catchments. A spring and well inventory like the
+one in the Suketi basin would give the Gaj maps the field data they lack. In turn, the mapping
+method of the Gaj study could be used in the Suketi hills, where no official estimates exist, to
+decide which of the 53 small watersheds should get structures first.
 
-\subsection{Towards an Integrated Framework}
-
-Drawing these threads together, Fig.~\ref{fig:framework} proposes a framework that links the
-three strands of evidence. Field inventory, hydrochemistry with isotopes, and remote sensing
-with climate data form the evidence base. These feed three parallel analyses: resource
-estimation and morphometry; quality indices and facies; and multi-criteria mapping of
-potential and infiltration. The outputs are then combined into a quality-screened recharge
-suitability map, delineated at the scale of individual springsheds, and ranked by demand and
-vulnerability. Implementation should involve local institutions and traditional systems, and a
-monitoring network of wells and springs should feed results back into the model so that
-weights and site choices can be revised over time. Such an approach is consistent with the
-basin-scale planning required by national policy \citep{mowr2002} and with the springshed
-approach recommended for the Himalaya \citep{niti2018,tambe2012}.
+Fig.~\ref{fig:framework} shows a simple combined approach. Field data, chemistry and satellite data
+are analysed separately and then merged into one recharge map that excludes polluted or
+unsuitable sites. Sites are planned at the scale of single spring catchments, as recommended for
+the Himalaya \citep{niti2018,tambe2012}, and a monitoring network feeds the results back into the
+next round of planning.
 
 \begin{figure}[t]
 \centering
 \begin{tikzpicture}[
   font=\scriptsize,
   ev/.style={draw=accent,fill=accent!8,rounded corners=2pt,align=center,text width=21.5mm,minimum height=8mm,inner sep=2pt},
-  an/.style={draw=accent,fill=accent!18,rounded corners=2pt,align=center,text width=21.5mm,minimum height=8mm,inner sep=2pt},
   it/.style={draw=barB,fill=barB!18,rounded corners=2pt,align=center,text width=72mm,minimum height=7mm,inner sep=2pt},
   arr/.style={-{Stealth[length=1.8mm]},thick,accent}]
-  \node[ev] (e1) {Field inventory\\(wells, springs, levels)};
-  \node[ev,right=2mm of e1] (e2) {Hydrochemistry\\and isotopes};
-  \node[ev,right=2mm of e2] (e3) {Remote sensing\\and climate data};
-  \node[an,below=5mm of e1] (a1) {Resource estimate,\\morphometry};
-  \node[an,below=5mm of e2] (a2) {Quality indices,\\facies, sources};
-  \node[an,below=5mm of e3] (a3) {MCDA potential,\\infiltration index};
-  \node[it,below=5mm of a2] (i1) {Quality-screened recharge suitability at springshed scale};
-  \node[it,below=3.5mm of i1] (i2) {Prioritisation by demand, vulnerability and cost};
-  \node[it,below=3.5mm of i2] (i3) {Implementation with communities and traditional systems};
-  \node[it,below=3.5mm of i3,fill=accent!8,draw=accent] (i4) {Monitoring of wells and springs};
-  \foreach \x in {1,2,3}{\draw[arr] (e\x) -- (a\x);}
-  \draw[arr] (a1.south) -- ++(0,-1.5mm) -| ([xshift=-25mm]i1.north);
-  \draw[arr] (a2) -- (i1);
-  \draw[arr] (a3.south) -- ++(0,-1.5mm) -| ([xshift=25mm]i1.north);
+  \node[ev] (e1) {Wells and springs\\(levels, discharge)};
+  \node[ev,right=2mm of e1] (e2) {Water chemistry\\and isotopes};
+  \node[ev,right=2mm of e2] (e3) {Satellite, soil\\and climate data};
+  \node[it,below=6mm of e2] (i1) {Recharge map screened for water quality};
+  \node[it,below=3.5mm of i1] (i2) {Sites chosen by spring catchment and local demand};
+  \node[it,below=3.5mm of i2,fill=accent!8,draw=accent] (i3) {Monitoring after construction};
+  \draw[arr] (e1.south) -- ++(0,-2mm) -| ([xshift=-25mm]i1.north);
+  \draw[arr] (e2) -- (i1);
+  \draw[arr] (e3.south) -- ++(0,-2mm) -| ([xshift=25mm]i1.north);
   \draw[arr] (i1) -- (i2);
   \draw[arr] (i2) -- (i3);
-  \draw[arr] (i3) -- (i4);
-  \draw[arr,dashed] (i4.east) -- ++(3mm,0) |- (e3.east) node[pos=0.25,font=\tiny,rotate=90,above]{feedback};
+  \draw[arr,dashed] (i3.east) -- ++(3mm,0) |- (e3.east) node[pos=0.25,font=\tiny,rotate=90,above]{feedback};
 \end{tikzpicture}
-\caption{Proposed quantity--quality--space framework for groundwater management in Lesser
-Himalayan watersheds.}
+\caption{Suggested combined approach for groundwater planning in Lesser Himalayan catchments.}
 \label{fig:framework}
 \end{figure}
 
-% =====================================================================
-\section{Research Gaps and Future Directions}
+\section{Future Work}
 
-The comparison points to the following priorities for future work in the Suketi, Gaj and
-similar Himalayan catchments.
 \begin{enumerate}
-  \item \textit{Long-term monitoring.} Establish a network of observation wells and gauged
-        springs, measured at least seasonally, to provide time series of levels, discharge and
-        chemistry and to update the 2004 and 2009 baselines.
-  \item \textit{Springshed delineation.} Combine geological mapping with stable isotopes and
-        tracer tests to identify the recharge area of important springs before structures are
-        built.
-  \item \textit{Wider quality coverage.} Add trace elements, microbial indicators and emerging
-        contaminants, and extend sampling to the Gaj watershed, with attention to fluoride in
-        granite terrain and nitrate in growing towns.
-  \item \textit{Robust mapping.} Test the sensitivity of AHP weights, compare AHP with
-        statistical or machine-learning methods, and validate maps with independent field data
-        rather than with layers derived from the same inputs \citep{machiwal2011}.
-  \item \textit{Recharge accounting.} Estimate the volume each proposed structure can add,
-        using water-balance or simple numerical models, and then monitor actual performance
-        after construction.
-  \item \textit{Climate scenarios.} Link groundwater potential to projected changes in rainfall,
-        snow and temperature so that structures are designed for future rather than past
-        conditions \citep{immerzeel2010}.
-  \item \textit{Social and economic feasibility.} Assess land tenure, community willingness,
-        maintenance arrangements and costs and benefits, and consider how traditional systems
-        can be restored alongside new structures.
+  \item Set up observation wells and gauged springs and measure them every season.
+  \item Use stable isotopes and geological mapping to find the recharge areas of important springs.
+  \item Extend water sampling to the Gaj watershed, and add trace metals and bacteria.
+  \item Test how sensitive the potential maps are to the chosen weights, and check them against field data.
+  \item Estimate how much water each recharge structure adds, and record its cost and upkeep.
+  \item Involve local communities, and restore traditional water systems along with new structures.
 \end{enumerate}
 
 % =====================================================================
 \section{Conclusions}
 
-This review compared three studies of groundwater in two Lesser Himalayan catchments of
-Himachal Pradesh. Taken together, they show that groundwater in these mountains has two
-contrasting parts. Valley-fill aquifers such as the Balh valley hold usable, under-developed
-reserves with shallow water levels, while hill tracts depend on small, fracture-controlled
-springs whose flow is low and strongly seasonal. The groundwater of the Suketi basin is of good
-chemical quality and suitable for drinking and irrigation, but local fluoride in granite and
-rising nitrate in towns show that quality cannot be taken for granted. In the Gaj watershed,
-geospatial analysis shows a decline in the most favourable recharge zones between 2010 and
-2022, together with weaker monsoons, warmer maximum temperatures and a growing population.
+The studies reviewed here show that groundwater in these Himalayan catchments occurs in two very
+different settings. The valley fill of the Balh valley holds a large and little-used resource with
+shallow water levels. The hills depend on small springs that weaken before every monsoon. The
+water of the Suketi basin is generally good for drinking and irrigation, but fluoride in granite
+areas and nitrate in towns need regular checks. In the Gaj watershed, the zones most favourable for
+groundwater shrank between 2010 and 2022 as rainfall declined.
 
-The three studies complement one another: the first addresses quantity, the second quality and
-the third spatial planning. Their main shortcomings are short records, limited field
-validation of maps, missing isotopic and microbial data, and little assessment of recharge
-volumes, costs or community roles. Future work should join these strands within a single
-framework that screens recharge sites for water quality, works at the scale of spring
-catchments, and is tested against a sustained monitoring network. Such an approach would give
-planners in the Himalayan foothills a stronger basis for protecting both the quantity and the
-quality of groundwater for the long term.
+Each study covers one part of the problem: quantity, quality or site selection. Future work should
+combine them, test maps against field data, screen recharge sites for water quality and plan at the
+scale of spring catchments. This would give local planners a sounder basis for managing
+groundwater in the Himalayan foothills.
 
 % =====================================================================
 \section{Acknowledgements}
@@ -909,8 +439,8 @@ The authors thank the researchers whose published work forms the basis of this r
 \section{Declarations}
 \noindent\textit{Conflict of interest:} The authors declare that they have no competing
 interests.\\
-\noindent\textit{Data availability:} All data discussed are drawn from the published sources
-cited; derived values can be reproduced from those sources.
+\noindent\textit{Data availability:} All data discussed are taken from the published sources
+cited.
 
 % =====================================================================
 \begin{thebibliography}{99}
@@ -937,29 +467,9 @@ Water Board, North Western Himalayan Region, Dharamshala.
 CGWB (2007). Manual on Artificial Recharge of Ground Water. Central Ground Water Board, Ministry
 of Water Resources, Government of India, New Delhi.
 
-\bibitem[Doneen(1964)]{doneen1964}
-Doneen, L.D. (1964). Notes on Water Quality in Agriculture. Water Science and Engineering Paper
-4001, Department of Water Science and Engineering, University of California, Davis.
-
-\bibitem[Fawcett(2006)]{fawcett2006}
-Fawcett, T. (2006). An introduction to ROC analysis. Pattern Recognition Letters, v. 27(8),
-pp. 861--874.
-
 \bibitem[Gibbs(1970)]{gibbs1970}
 Gibbs, R.J. (1970). Mechanisms controlling world water chemistry. Science, v. 170(3962),
 pp. 1088--1090.
-
-\bibitem[Gleeson et~al.(2012)]{gleeson2012}
-Gleeson, T., Wada, Y., Bierkens, M.F.P. and van Beek, L.P.H. (2012). Water balance of global
-aquifers revealed by groundwater footprint. Nature, v. 488(7410), pp. 197--200.
-
-\bibitem[Hem(1985)]{hem1985}
-Hem, J.D. (1985). Study and Interpretation of the Chemical Characteristics of Natural Water,
-3rd edn. U.S. Geological Survey Water-Supply Paper 2254, Washington, D.C.
-
-\bibitem[Immerzeel et~al.(2010)]{immerzeel2010}
-Immerzeel, W.W., van Beek, L.P.H. and Bierkens, M.F.P. (2010). Climate change will affect the
-Asian water towers. Science, v. 328(5984), pp. 1382--1385.
 
 \bibitem[Kumar and Mahajan(2001)]{kumar2001}
 Kumar, S. and Mahajan, A.K. (2001). Seismotectonics of the Kangra region, northwest Himalaya.
@@ -970,24 +480,13 @@ Machiwal, D., Jha, M.K. and Mal, B.C. (2011). Assessment of groundwater potentia
 semi-arid region of India using remote sensing, GIS and MCDM techniques. Water Resources
 Management, v. 25(5), pp. 1359--1386.
 
-\bibitem[Malczewski(2006)]{malczewski2006}
-Malczewski, J. (2006). GIS-based multicriteria decision analysis: a survey of the literature.
-International Journal of Geographical Information Science, v. 20(7), pp. 703--726.
-
 \bibitem[Meinzer(1923)]{meinzer1923}
 Meinzer, O.E. (1923). Outline of Ground-water Hydrology, with Definitions. U.S. Geological
 Survey Water-Supply Paper 494, Washington, D.C.
 
-\bibitem[MoWR(2002)]{mowr2002}
-MoWR (2002). National Water Policy. Ministry of Water Resources, Government of India, New Delhi.
-
 \bibitem[NITI Aayog(2018)]{niti2018}
 NITI Aayog (2018). Inventory and Revival of Springs in the Himalayas for Water Security. Report
 of Working Group I, Government of India, New Delhi.
-
-\bibitem[O'Brien(2007)]{obrien2007}
-O'Brien, R.M. (2007). A caution regarding rules of thumb for variance inflation factors.
-Quality \& Quantity, v. 41(5), pp. 673--690.
 
 \bibitem[Piper(1944)]{piper1944}
 Piper, A.M. (1944). A graphic procedure in the geochemical interpretation of water-analyses.
@@ -1017,11 +516,6 @@ depletion in India. Nature, v. 460(7258), pp. 999--1002.
 \bibitem[Saaty(1980)]{saaty1980}
 Saaty, T.L. (1980). The Analytic Hierarchy Process. McGraw-Hill, New York.
 
-\bibitem[Schoeller(1967)]{schoeller1967}
-Schoeller, H. (1967). Qualitative evaluation of groundwater resources. In: Methods and
-Techniques of Groundwater Investigation and Development. Water Resources Series No. 33, UNESCO,
-Paris, pp. 44--52.
-
 \bibitem[Sharma and Kanwar(2009)]{sharma2009}
 Sharma, N. and Kanwar, P. (2009). Indigenous water conservation systems -- a rich tradition of
 rural Himachal Pradesh. Indian Journal of Traditional Knowledge, v. 8(4), pp. 510--513.
@@ -1035,10 +529,6 @@ watershed. Discover Sustainability, v. 6, Article 1163.
 \bibitem[Srikantia and Bhargava(1998)]{srikantia1998}
 Srikantia, S.V. and Bhargava, O.N. (1998). Geology of Himachal Pradesh. Geological Society of
 India, Bangalore, 406p.
-
-\bibitem[Strahler(1957)]{strahler1957}
-Strahler, A.N. (1957). Quantitative analysis of watershed geomorphology. Transactions, American
-Geophysical Union, v. 38(6), pp. 913--920.
 
 \bibitem[Tambe et~al.(2012)]{tambe2012}
 Tambe, S., Kharel, G., Arrawatia, M.L., Kulkarni, H., Mahamuni, K. and Ganeriwala, A.K. (2012).
