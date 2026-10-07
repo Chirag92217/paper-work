@@ -1,0 +1,435 @@
+<title>Accenture Japan OA Mock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: an exam console. Question sheet on the left, OMR-style answer grid on the right; stacks on phones. */
+:root {
+  --paper: #fbfafc;
+  --sheet: #ffffff;
+  --ink: #1f1a2b;
+  --muted: #6b6478;
+  --line: #e7dfe8;
+  --omr: #c2185b;         /* answer-sheet ink */
+  --omr-soft: #fbe6ef;
+  --good: #1f7a4d;
+  --good-soft: #e3f3ea;
+  --bad: #b3261e;
+  --bad-soft: #fbe9e7;
+  --flag: #a15c00;
+  --flag-soft: #fff1d6;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17141d; --sheet: #211d29; --ink: #efeaf4; --muted: #a79fb3; --line: #352f40;
+    --omr: #f06292; --omr-soft: #3a2130; --good: #6fcf97; --good-soft: #1b3226;
+    --bad: #f28b82; --bad-soft: #3a1f1d; --flag: #f3b54a; --flag-soft: #3a2d14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17141d; --sheet: #211d29; --ink: #efeaf4; --muted: #a79fb3; --line: #352f40;
+  --omr: #f06292; --omr-soft: #3a2130; --good: #6fcf97; --good-soft: #1b3226;
+  --bad: #f28b82; --bad-soft: #3a1f1d; --flag: #f3b54a; --flag-soft: #3a2d14;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55; padding: 0 16px; padding-block: 0 48px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, label:focus-within { outline: 2px solid var(--omr); outline-offset: 2px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* top bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); margin: 0 -16px; padding: 12px 16px; }
+.bar .wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.bar h1 { font-size: 18px; }
+.bar .spacer { flex: 1; }
+.timer { font-family: var(--f-mono); font-size: 18px; font-weight: 600; padding: 4px 10px; border: 1.5px solid var(--omr); color: var(--omr); border-radius: 6px; font-variant-numeric: tabular-nums; }
+.timer.low { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+
+.btn { border: 1.5px solid var(--line); background: var(--sheet); padding: 8px 14px; border-radius: 8px; font-weight: 500; }
+.btn:hover { border-color: var(--omr); }
+.btn.primary { background: var(--omr); border-color: var(--omr); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #17141d; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #17141d; } }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* setup */
+.setup { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; margin-top: 32px; align-items: start; }
+.setup h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 6px 0 12px; }
+.lede { color: var(--muted); max-width: 58ch; margin: 0 0 20px; }
+.modes { display: grid; gap: 12px; }
+.mode { text-align: left; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; }
+.mode[aria-pressed="true"] { border-color: var(--omr); box-shadow: inset 4px 0 0 var(--omr); }
+.mode b { font-family: var(--f-display); font-size: 17px; }
+.mode span { color: var(--muted); font-size: 14px; }
+.opts-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 8px; }
+.chip { border: 1.5px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 5px 12px; font-size: 13.5px; }
+.chip[aria-pressed="true"] { background: var(--omr-soft); border-color: var(--omr); color: var(--ink); }
+.chip .n { color: var(--muted); font-family: var(--f-mono); font-size: 12px; margin-left: 4px; }
+.panel { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.panel h3 { font-size: 16px; margin-bottom: 10px; }
+.history { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.history li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.empty { color: var(--muted); font-size: 14px; margin: 0; }
+.rules { margin: 14px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+
+/* exam */
+.exam { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 24px; margin-top: 24px; align-items: start; }
+.qcard { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.qmeta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.tag { font-size: 12px; padding: 2px 8px; border-radius: 4px; background: var(--omr-soft); color: var(--ink); }
+.qtext { font-size: 18px; font-weight: 500; margin: 0 0 18px; max-width: 65ch; }
+.choices { display: grid; gap: 10px; }
+.choice { display: flex; gap: 12px; align-items: flex-start; text-align: left; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 10px; padding: 11px 14px; width: 100%; }
+.choice:hover { border-color: var(--omr); }
+.bubble { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--omr); color: var(--omr); display: grid; place-items: center; font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; margin-top: -1px; }
+.choice.sel .bubble { background: var(--omr); color: var(--sheet); }
+.choice.sel { border-color: var(--omr); }
+.choice.right { border-color: var(--good); background: var(--good-soft); }
+.choice.right .bubble { background: var(--good); border-color: var(--good); color: var(--sheet); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.choice.wrong .bubble { background: var(--bad); border-color: var(--bad); color: var(--sheet); }
+.choice-text { min-width: 0; }
+.explain { margin-top: 16px; padding: 12px 14px; border-radius: 8px; background: var(--paper); border: 1px dashed var(--line); font-size: 14.5px; }
+.explain b { font-family: var(--f-display); }
+.nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.nav .spacer { flex: 1; }
+.btn.flagged { border-color: var(--flag); background: var(--flag-soft); }
+
+.sheet h3 { font-size: 15px; margin-bottom: 4px; }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0 12px; }
+.cell { aspect-ratio: 1; max-width: 100%; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 50%; font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; display: grid; place-items: center; padding: 0; position: relative; }
+.cell.done { background: var(--omr); border-color: var(--omr); color: var(--sheet); }
+.cell.flag::after { content: ""; position: absolute; top: -2px; right: -2px; width: 9px; height: 9px; border-radius: 50%; background: var(--flag); border: 2px solid var(--sheet); }
+.cell.cur { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cell.ok { background: var(--good); border-color: var(--good); color: var(--sheet); }
+.cell.ko { background: var(--bad); border-color: var(--bad); color: var(--sheet); }
+.legend { display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--line); }
+.dot.d { background: var(--omr); border-color: var(--omr); }
+.dot.f { background: var(--flag); border-color: var(--flag); }
+.count { font-size: 13.5px; color: var(--muted); margin-bottom: 12px; }
+
+/* confirm */
+.confirm { margin-top: 12px; padding: 12px; border: 1.5px solid var(--flag); background: var(--flag-soft); border-radius: 8px; font-size: 14px; display: grid; gap: 10px; }
+.confirm .row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* results */
+.results { margin-top: 28px; display: grid; gap: 24px; }
+.score { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; }
+.big { font-family: var(--f-display); font-size: clamp(48px, 9vw, 76px); line-height: 1; }
+.big small { font-size: .4em; color: var(--muted); }
+.verdict { font-size: 16px; max-width: 60ch; margin: 6px 0 0; }
+.topics { display: grid; gap: 10px; }
+.trow { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr) 56px; gap: 12px; align-items: center; font-size: 14px; }
+.track { height: 10px; background: var(--omr-soft); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; background: var(--omr); border-radius: 999px; }
+.fill.weak { background: var(--bad); }
+.review { display: grid; gap: 12px; }
+.ritem { background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; border-left: 4px solid var(--good); }
+.ritem.x { border-left-color: var(--bad); }
+.ritem.s { border-left-color: var(--muted); }
+.ritem p { margin: 4px 0; }
+.ritem .a { font-size: 14px; }
+.ritem .e { font-size: 14px; color: var(--muted); }
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+@media (max-width: 760px) {
+  .setup, .exam { grid-template-columns: minmax(0, 1fr); }
+  .grid { grid-template-columns: repeat(10, 1fr); }
+  .score { grid-template-columns: minmax(0, 1fr); }
+  .trow { grid-template-columns: minmax(0, 1fr) 48px; }
+  .trow .track { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .choice, .cell, .btn, .chip, .mode { transition: border-color .15s, background-color .15s; }
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <h1>Accenture Japan OA Mock</h1>
+    <span class="spacer"></span>
+    <span id="progress" class="eyebrow" hidden></span>
+    <span id="timer" class="timer" hidden>25:00</span>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<script>
+const BANK = [{"t":"Operating Systems","q":"Which of these is shared by all threads of the same process?","a":"Heap and global data (the address space)","w":["Stack","Program counter","Register set"],"e":"Each thread has its own stack, PC and registers. Code, heap, globals and open files are shared."},{"t":"Operating Systems","q":"Which of these is NOT one of the four necessary conditions for deadlock?","a":"Preemption of resources","w":["Mutual exclusion","Hold and wait","Circular wait"],"e":"The condition is NO preemption. If resources can be preempted, deadlock cannot happen."},{"t":"Operating Systems","q":"The Banker's algorithm is used for:","a":"Deadlock avoidance","w":["Deadlock prevention","Deadlock detection and recovery","CPU scheduling"],"e":"It grants a request only if the system stays in a safe state, which is avoidance. Prevention breaks one of the four conditions."},{"t":"Operating Systems","q":"Four processes all arrive at time 0 with burst times 6, 8, 7, 3. What is the average waiting time under non-preemptive SJF?","a":"7","w":["10.25","6","8.75"],"e":"The order is 3, 6, 7, 8, so the waits are 0, 3, 9, 16 and the average is 28/4 = 7. FCFS would give 10.25."},{"t":"Operating Systems","q":"Belady's anomaly (more frames causing MORE page faults) can happen with:","a":"FIFO page replacement","w":["LRU page replacement","Optimal page replacement","Any stack-based algorithm"],"e":"LRU and Optimal are stack algorithms and never show Belady's anomaly. FIFO can."},{"t":"Operating Systems","q":"Reference string 7 0 1 2 0 3 0 4 with 3 frames under LRU. How many page faults?","a":"6","w":["5","7","4"],"e":"Faults on 7, 0, 1, 2, 3 and 4. The two later 0s are hits."},{"t":"Operating Systems","q":"Thrashing means:","a":"The system spends more time swapping pages than doing useful work","w":["The CPU is idle because no process is ready","Two processes wait for each other forever","A process uses up its time slice too often"],"e":"It is caused by too little memory for the working sets. Fix it by lowering the degree of multiprogramming or by using a working-set model."},{"t":"Operating Systems","q":"The main difference between a mutex and a binary semaphore is:","a":"A mutex has ownership: only the thread that locked it should unlock it","w":["A semaphore can only take the values 0 and 1","A mutex can be used for signalling between processes but a semaphore cannot","There is no difference"],"e":"Semaphores are signalling tools that any thread can post. A mutex is a lock owned by one thread."},{"t":"Operating Systems","q":"32-bit virtual addresses, 4 KB pages. How many entries are in a single-level page table?","a":"2^20","w":["2^12","2^32","2^10"],"e":"4 KB = 2^12, so the offset uses 12 bits. That leaves 20 bits for the page number, so 2^20 entries."},{"t":"Operating Systems","q":"Why is a context switch between threads of the same process cheaper than between processes?","a":"The address space stays the same, so there is no page-table switch or TLB flush","w":["Threads do not have registers","Threads never need the kernel","Threads share the same stack"],"e":"The thread switch still saves and restores registers and the stack pointer, but the memory mapping does not change."},{"t":"Operating Systems","q":"Round Robin with a very large time quantum behaves like:","a":"FCFS","w":["SJF","Priority scheduling","Shortest Remaining Time First"],"e":"If no process ever uses up its quantum, processes simply run in arrival order."},{"t":"Operating Systems","q":"Starvation in priority scheduling is usually fixed with:","a":"Aging","w":["Paging","Thrashing","Spooling"],"e":"Aging slowly raises the priority of processes that have waited a long time."},{"t":"Operating Systems","q":"Paging can suffer from which kind of fragmentation?","a":"Internal fragmentation","w":["External fragmentation","Both internal and external equally","Neither"],"e":"The last page of a process may be partly empty (internal). Paging removes external fragmentation. Segmentation suffers from external fragmentation."},{"t":"Operating Systems","q":"A zombie process is a process that:","a":"Has finished, but its parent has not yet called wait() to read its exit status","w":["Is still running after its parent has died","Is stuck in a deadlock","Uses 100% CPU without doing anything"],"e":"A running child whose parent has died is an orphan, and init/systemd adopts it."},{"t":"Operating Systems","q":"A program calls fork() three times in a row and then prints \"hi\" once. How many times is \"hi\" printed?","a":"8","w":["3","4","6"],"e":"Each fork doubles the number of processes: 2^3 = 8."},{"t":"Operating Systems","q":"Which of these is NOT a requirement for a correct critical-section solution?","a":"The shortest process must enter first","w":["Mutual exclusion","Progress","Bounded waiting"],"e":"The three requirements are mutual exclusion, progress and bounded waiting."},{"t":"Computer Networks","q":"The TCP three-way handshake is:","a":"SYN → SYN-ACK → ACK","w":["SYN → ACK → FIN","ACK → SYN → SYN-ACK","SYN → SYN → ACK"],"e":"FIN is used to close the connection, which takes a four-way exchange."},{"t":"Computer Networks","q":"DNS queries normally use:","a":"Port 53, mostly over UDP","w":["Port 80 over TCP","Port 443 over UDP","Port 25 over TCP"],"e":"DNS falls back to TCP for large responses and zone transfers."},{"t":"Computer Networks","q":"A router mainly works at which OSI layer?","a":"Network layer (Layer 3)","w":["Data link layer (Layer 2)","Transport layer (Layer 4)","Physical layer (Layer 1)"],"e":"Routers forward packets by IP address. Switches forward frames by MAC address (Layer 2)."},{"t":"Computer Networks","q":"Which protocol is connectionless?","a":"UDP","w":["TCP","HTTP/1.1 over TCP","FTP"],"e":"UDP has no handshake, no guaranteed delivery and no ordering. It is used for DNS, video calls and games."},{"t":"Computer Networks","q":"Which HTTP status code means \"you are identified, but you are not allowed to do this\"?","a":"403 Forbidden","w":["401 Unauthorized","404 Not Found","400 Bad Request"],"e":"401 means you are not authenticated or your credentials are bad. 403 means you are authenticated but not permitted."},{"t":"Computer Networks","q":"How many usable host addresses are there in a /26 IPv4 subnet?","a":"62","w":["64","30","126"],"e":"2^(32−26) = 64. Subtract the network and broadcast addresses to get 62."},{"t":"Computer Networks","q":"Which protocol finds the MAC address for a known IPv4 address?","a":"ARP","w":["DNS","DHCP","ICMP"],"e":"DHCP assigns IP addresses, DNS turns names into IPs, and ICMP is used by ping and traceroute."},{"t":"Computer Networks","q":"Which HTTP method is idempotent?","a":"PUT","w":["POST","PATCH","None of them"],"e":"Sending the same PUT again leaves the resource in the same state. POST may create duplicates. PATCH is not guaranteed to be idempotent."},{"t":"Computer Networks","q":"TCP flow control is done with:","a":"The receiver's advertised window (sliding window)","w":["Slow start","Checksums","Three-way handshake"],"e":"Flow control protects the receiver. Congestion control (slow start, cwnd) protects the network."},{"t":"Computer Networks","q":"Which address is a private IPv4 address?","a":"192.168.10.5","w":["8.8.8.8","172.32.1.1","11.0.0.1"],"e":"The private ranges are 10.0.0.0/8, 172.16.0.0/12 (172.16–172.31) and 192.168.0.0/16."},{"t":"Computer Networks","q":"In the OSI model, which layer is traditionally responsible for encryption and data formatting?","a":"Presentation layer","w":["Session layer","Application layer","Transport layer"],"e":"Session manages dialogues between applications. In TCP/IP, both are merged into the application layer."},{"t":"Computer Networks","q":"How many bits long is an IPv6 address?","a":"128","w":["32","64","256"],"e":"IPv4 is 32 bits and IPv6 is 128 bits."},{"t":"Computer Networks","q":"\"Each request carries everything the server needs, and the server stores no client session\" describes which REST principle?","a":"Statelessness","w":["Cacheability","Layered system","Uniform interface"],"e":"Statelessness makes horizontal scaling easy, because any server can handle any request."},{"t":"Computer Networks","q":"During a TLS handshake, the shared symmetric session key is set up using:","a":"An asymmetric key exchange such as (EC)DHE","w":["The server's password","A hash of the URL","The MAC address"],"e":"Asymmetric cryptography sets up the key. Symmetric cryptography (such as AES) then encrypts the bulk data, because it is fast."},{"t":"Computer Networks","q":"What does a switch use to forward frames?","a":"Destination MAC address","w":["Destination IP address","Port number","Domain name"],"e":"A hub repeats each frame to all ports. A switch learns MAC addresses and sends frames only to the right port."},{"t":"DBMS & SQL","q":"In ACID, \"Isolation\" means:","a":"Concurrent transactions do not see each other's intermediate, uncommitted effects","w":["Once committed, data survives crashes","A transaction runs completely or not at all","Data always satisfies the constraints"],"e":"The wrong options describe Durability, Atomicity and Consistency."},{"t":"DBMS & SQL","q":"Third Normal Form (3NF) mainly removes:","a":"Transitive dependencies of non-key attributes on the key","w":["Repeating groups","Partial dependencies on part of a composite key","Multivalued dependencies"],"e":"1NF removes repeating groups, 2NF removes partial dependencies, 3NF removes transitive dependencies, and 4NF removes multivalued dependencies."},{"t":"DBMS & SQL","q":"A relation is in BCNF if, for every non-trivial functional dependency X → Y:","a":"X is a superkey","w":["Y is a prime attribute","X is a primary key column","Y is not null"],"e":"3NF also allows Y to be prime. BCNF does not, so it is stricter."},{"t":"DBMS & SQL","q":"Which join returns every row of the left table, with NULLs where there is no match?","a":"LEFT OUTER JOIN","w":["INNER JOIN","RIGHT OUTER JOIN","CROSS JOIN"],"e":"INNER JOIN keeps only matching rows."},{"t":"DBMS & SQL","q":"Table A has 3 rows and table B has 4 rows. How many rows does A CROSS JOIN B return?","a":"12","w":["7","4","3"],"e":"A cross join is the Cartesian product: 3 × 4."},{"t":"DBMS & SQL","q":"What is the difference between WHERE and HAVING?","a":"WHERE filters rows before grouping. HAVING filters groups after aggregation.","w":["They are the same","HAVING runs before GROUP BY","WHERE can use aggregate functions such as COUNT()"],"e":"You cannot write WHERE COUNT(*) > 5. Use HAVING for that."},{"t":"DBMS & SQL","q":"Which command removes the table's data AND its structure?","a":"DROP","w":["DELETE","TRUNCATE","ALTER"],"e":"DELETE removes rows (optionally with WHERE, and can be rolled back). TRUNCATE quickly removes all rows but keeps the table."},{"t":"DBMS & SQL","q":"Adding an index to a column usually:","a":"Makes reads/lookups faster but makes inserts and updates slower","w":["Makes all operations faster","Makes reads slower and writes faster","Has no effect on performance"],"e":"The index (often a B+ tree) must be updated on every write."},{"t":"DBMS & SQL","q":"A primary key column must be:","a":"Unique and NOT NULL","w":["Unique but can be NULL","Any column with an index","An integer"],"e":"A foreign key can contain duplicates and, unless it is constrained, NULLs."},{"t":"DBMS & SQL","q":"A \"dirty read\" is:","a":"Reading data written by another transaction that has not committed yet","w":["Reading a row twice and getting different values","Reading deleted rows","New rows appearing when a range query is repeated"],"e":"Dirty reads are prevented from READ COMMITTED upwards. The wrong options describe a non-repeatable read and a phantom read."},{"t":"DBMS & SQL","q":"Which query returns the second-highest salary?","a":"SELECT MAX(salary) FROM emp WHERE salary < (SELECT MAX(salary) FROM emp);","w":["SELECT salary FROM emp ORDER BY salary LIMIT 2;","SELECT MAX(salary) - 1 FROM emp;","SELECT SECOND(salary) FROM emp;"],"e":"Another way is ORDER BY salary DESC with LIMIT 1 OFFSET 1 on DISTINCT salaries."},{"t":"DBMS & SQL","q":"COUNT(column) differs from COUNT(*) because:","a":"COUNT(column) ignores NULL values in that column","w":["COUNT(*) ignores NULL rows","COUNT(column) counts only distinct values","There is no difference"],"e":"COUNT(DISTINCT column) is the one that counts distinct values."},{"t":"DBMS & SQL","q":"How many clustered indexes can a table have?","a":"At most one","w":["Unlimited","One per column","Exactly two"],"e":"A clustered index sets the physical order of the rows, and rows can only be stored in one order."},{"t":"OOP","q":"Runtime polymorphism is achieved through:","a":"Method overriding (virtual functions)","w":["Method overloading","Templates/generics","Operator overloading"],"e":"Overloading is resolved at compile time. Overriding is chosen at runtime through the vtable."},{"t":"OOP","q":"When is method overloading resolved?","a":"At compile time","w":["At runtime","At link time only","Never"],"e":"The compiler picks the overload from the argument types."},{"t":"OOP","q":"In Java, what can an abstract class have that an interface cannot?","a":"Constructors and instance (non-static) fields","w":["Abstract methods","Public methods","Static methods"],"e":"Since Java 8, interfaces can have default and static methods, but they still cannot have instance state or constructors."},{"t":"OOP","q":"Encapsulation is best described as:","a":"Bundling data with the methods that use it, and restricting direct access to that data","w":["Inheriting behaviour from a parent class","Hiding implementation behind an interface for multiple types","Creating many objects from one class"],"e":"Abstraction is about showing only what is essential. Encapsulation is about protecting internal state."},{"t":"OOP","q":"In C++, the \"diamond problem\" of multiple inheritance is solved with:","a":"Virtual inheritance","w":["Virtual functions","Friend classes","Templates"],"e":"With class B : virtual public A and class C : virtual public A, class D gets only one shared A subobject."},{"t":"OOP","q":"\"A class should have only one reason to change\" is which SOLID principle?","a":"Single Responsibility Principle","w":["Open/Closed Principle","Liskov Substitution Principle","Dependency Inversion Principle"],"e":"S = Single responsibility, O = Open/closed, L = Liskov, I = Interface segregation, D = Dependency inversion."},{"t":"OOP","q":"The Liskov Substitution Principle says:","a":"Objects of a subclass should be usable wherever the base class is expected, without breaking correctness","w":["A class should depend on abstractions","Classes should be open for extension","Clients should not depend on methods they don't use"],"e":"The classic violation is Square extends Rectangle, where setting the width changes the height."},{"t":"OOP","q":"The Singleton pattern makes sure that:","a":"A class has only one instance, with a global access point","w":["A class cannot be inherited","Objects are created only through subclasses","Every method is static"],"e":"In multithreaded code, the instance must be created in a thread-safe way."},{"t":"DSA & Complexity","q":"What is the worst-case time complexity of quicksort?","a":"O(n^2)","w":["O(n log n)","O(n)","O(log n)"],"e":"It happens when the pivot is always the smallest or largest element, for example a sorted array with the first element as pivot. The average is O(n log n)."},{"t":"DSA & Complexity","q":"Which sorting algorithm is stable?","a":"Merge sort","w":["Quick sort","Heap sort","Selection sort"],"e":"Stable means equal keys keep their original order. Insertion sort and bubble sort are also stable."},{"t":"DSA & Complexity","q":"Hash table lookup takes on average and in the worst case:","a":"O(1) on average, O(n) in the worst case","w":["O(1) and O(1)","O(log n) and O(n)","O(n) and O(n)"],"e":"The worst case happens when every key collides into the same bucket."},{"t":"DSA & Complexity","q":"Which data structure does BFS use?","a":"Queue","w":["Stack","Heap","Hash set only"],"e":"DFS uses a stack (or recursion). Dijkstra uses a priority queue."},{"t":"DSA & Complexity","q":"An inorder traversal of a binary search tree visits the keys:","a":"In sorted (ascending) order","w":["In level order","In reverse sorted order","In insertion order"],"e":"This is the standard way to check whether a tree is a valid BST."},{"t":"DSA & Complexity","q":"Dijkstra's algorithm may give wrong answers when the graph has:","a":"Negative edge weights","w":["Cycles","Undirected edges","More than 10^5 vertices"],"e":"Use Bellman-Ford when there are negative edges. Bellman-Ford can also detect negative cycles."},{"t":"DSA & Complexity","q":"What does T(n) = 2T(n/2) + n solve to?","a":"O(n log n)","w":["O(n)","O(n^2)","O(log n)"],"e":"This is case 2 of the Master theorem, and it is the merge sort recurrence."},{"t":"DSA & Complexity","q":"Building a binary heap from n unsorted elements with bottom-up heapify takes:","a":"O(n)","w":["O(n log n)","O(log n)","O(n^2)"],"e":"Most nodes are near the bottom and sift down only a short distance, so the total work is linear."},{"t":"DSA & Complexity","q":"What is the minimum number of edges in a connected undirected graph with n vertices?","a":"n − 1","w":["n","n(n−1)/2","log n"],"e":"Such a graph is a tree. Adding one more edge creates a cycle."},{"t":"DSA & Complexity","q":"for (i = 1..n) { for (j = 1; j < n; j *= 2) {...} } has complexity:","a":"O(n log n)","w":["O(n^2)","O(n)","O(log^2 n)"],"e":"The inner loop doubles j each time, so it runs log n times for each of the n outer iterations."},{"t":"DSA & Complexity","q":"What does the postfix expression 2 3 4 * + evaluate to?","a":"14","w":["20","24","10"],"e":"Use a stack: 3 × 4 = 12, then 2 + 12 = 14."},{"t":"DSA & Complexity","q":"Which combination gives an LRU cache with O(1) get and put?","a":"Hash map + doubly linked list","w":["Array + binary search","Min-heap only","Singly linked list only"],"e":"The map finds the node in O(1). The list moves the node to the front, or removes the oldest from the back, in O(1)."},{"t":"DSA & Complexity","q":"How many structurally different BSTs can be built from 3 distinct keys?","a":"5","w":["6","3","8"],"e":"This is the Catalan number C3 = 5."},{"t":"DSA & Complexity","q":"Which data structure is best for autocomplete (prefix search)?","a":"Trie","w":["Heap","Queue","Hash set of full words"],"e":"Searching a prefix of length L takes O(L), and all words with that prefix are below that node."},{"t":"DSA & Complexity","q":"Which algorithm detects a cycle in a DIRECTED graph?","a":"DFS that tracks nodes on the current recursion stack (or Kahn's algorithm failing to process all nodes)","w":["Plain BFS with a visited set","Union-Find on the directed edges","Binary search"],"e":"Union-Find works for undirected graphs but not directed ones. A visited node reached again in BFS is not always a cycle in a directed graph."},{"t":"DSA & Complexity","q":"You need the minimum capacity that lets a task finish within D days, and the check \"does capacity X work?\" is monotonic. Which technique fits best?","a":"Binary search on the answer","w":["Backtracking","Sliding window","Topological sort"],"e":"Search over the range of possible answers. Each check is usually an O(n) greedy pass."},{"t":"DSA & Complexity","q":"What is the height of a complete binary tree with n nodes?","a":"⌊log2 n⌋","w":["n − 1","√n","n / 2"],"e":"Each level doubles the number of nodes, so the height is logarithmic."},{"t":"Cloud & DevOps","q":"Which is an example of SaaS?","a":"Gmail / Microsoft 365","w":["Amazon EC2","Google App Engine","A bare-metal server rental"],"e":"IaaS gives you VMs (EC2). PaaS gives you a platform to deploy code (App Engine, Heroku). SaaS is finished software."},{"t":"Cloud & DevOps","q":"The key difference between containers and virtual machines is:","a":"Containers share the host OS kernel. VMs each run a full guest OS on a hypervisor.","w":["Containers need a hypervisor","VMs start faster than containers","Containers cannot run on Linux"],"e":"Because they share the kernel, containers are lighter and start faster, but they are less isolated."},{"t":"Cloud & DevOps","q":"What is the smallest deployable unit in Kubernetes?","a":"Pod","w":["Node","Container image","Deployment"],"e":"A pod holds one or more containers that share network and storage. A Deployment manages ReplicaSets of pods."},{"t":"Cloud & DevOps","q":"Horizontal scaling means:","a":"Adding more machines or instances","w":["Adding more CPU/RAM to one machine","Moving to a faster disk","Compressing the data"],"e":"Vertical scaling (scale up) means making one machine bigger."},{"t":"Cloud & DevOps","q":"How are serverless functions (such as AWS Lambda) usually billed?","a":"Per invocation and execution time","w":["A fixed monthly price per server","Per number of developers","Per line of code"],"e":"Serverless functions scale to zero when idle. The trade-offs are cold starts and execution time limits."},{"t":"Cloud & DevOps","q":"The CAP theorem says that during a network partition, a distributed system must choose between:","a":"Consistency and Availability","w":["Cost and Performance","Availability and Durability","Security and Scalability"],"e":"Partitions cannot be avoided, so the real choice is between CP and AP."},{"t":"Cloud & DevOps","q":"Continuous Integration (CI) means:","a":"Developers merge often, and every merge is automatically built and tested","w":["Code is deployed to production by hand once a month","Only the QA team runs tests","Deploying without version control"],"e":"Continuous Delivery and Deployment extend CI by automatically releasing the build."},{"t":"Cloud & DevOps","q":"Which AWS service is object storage?","a":"Amazon S3","w":["Amazon EC2","Amazon RDS","AWS Lambda"],"e":"In Azure this is Blob Storage, and in GCP it is Cloud Storage. RDS is managed relational databases."},{"t":"Cloud & DevOps","q":"Deploying across multiple Availability Zones mainly improves:","a":"High availability and fault tolerance","w":["Code readability","Compile speed","Per-request latency within a single zone"],"e":"If one data centre fails, the others keep serving traffic."},{"t":"Cloud & DevOps","q":"Under the cloud shared-responsibility model, for IaaS the CUSTOMER is responsible for:","a":"Their data, IAM permissions, OS patching and application security","w":["The physical security of data centres","The hypervisor","Power and cooling"],"e":"The provider secures the cloud itself. The customer secures what they put in it."},{"t":"Cloud & DevOps","q":"A CDN reduces latency mainly by:","a":"Caching content on edge servers close to users","w":["Compressing the database","Increasing CPU clock speed","Encrypting traffic"],"e":"Examples include CloudFront, Akamai and Cloudflare."},{"t":"Cloud & DevOps","q":"In Docker, the relationship between an image and a container is:","a":"A container is a running instance of an image","w":["An image is a running container","They are the same thing","A container builds the Dockerfile"],"e":"A Dockerfile builds an image, an image is run as a container, and the same image can run as many containers."},{"t":"Cloud & DevOps","q":"A load balancer is mainly used to:","a":"Spread incoming traffic across several servers","w":["Store session data permanently","Compile code","Back up the database"],"e":"It also runs health checks and removes unhealthy instances from rotation."},{"t":"Security","q":"Which of these is a symmetric encryption algorithm?","a":"AES","w":["RSA","ECC","Diffie-Hellman"],"e":"RSA and ECC are asymmetric. Diffie-Hellman is a key-exchange protocol."},{"t":"Security","q":"How does hashing differ from encryption?","a":"Hashing is one-way. Encryption can be reversed with a key.","w":["Hashing needs a key to reverse","Encryption is always one-way","They are the same"],"e":"Hashes are used for integrity checks and storing passwords. Encryption is used for confidentiality."},{"t":"Security","q":"What is the best way to store user passwords?","a":"A salted, slow hash such as bcrypt or Argon2","w":["Plain text in a protected table","AES encryption with a key stored in the code","An unsalted MD5 hash"],"e":"The salt defeats rainbow tables, and the slow hash makes brute force expensive."},{"t":"Security","q":"What is the most effective defence against SQL injection?","a":"Parameterized queries (prepared statements)","w":["Hiding error messages","Using HTTPS","Client-side input validation only"],"e":"With parameters, user input is treated as data and never as SQL code."},{"t":"Security","q":"To create a digital signature, the sender signs with:","a":"The sender's private key","w":["The receiver's public key","The sender's public key","A shared symmetric key"],"e":"Anyone can verify the signature with the sender's public key. This gives authenticity and non-repudiation."},{"t":"Security","q":"Cross-Site Scripting (XSS) is:","a":"Injecting malicious scripts into pages that other users view","w":["Forging requests from a logged-in user's browser","Flooding a server with traffic","Guessing passwords"],"e":"The first wrong option describes CSRF and the second describes DoS. Defend against XSS with output encoding and a Content Security Policy."},{"t":"Web, AI & Software Engineering","q":"How does React's virtual DOM improve performance?","a":"It compares the new virtual tree with the old one and applies only the minimum changes to the real DOM","w":["It replaces the browser's DOM completely","It runs JavaScript on the server only","It caches API responses"],"e":"This comparison step is called reconciliation."},{"t":"Web, AI & Software Engineering","q":"In React, when does useEffect(fn, []) run fn (outside StrictMode development)?","a":"Once, after the first render (on mount)","w":["Before every render","After every render","Never"],"e":"With no dependency array, it runs after every render. With [x], it runs whenever x changes."},{"t":"Web, AI & Software Engineering","q":"A model with 99% training accuracy and 70% test accuracy is most likely:","a":"Overfitting","w":["Underfitting","Perfectly generalised","Suffering from data leakage only"],"e":"Remedies include more data, regularisation, dropout, early stopping and simpler models."},{"t":"Web, AI & Software Engineering","q":"Precision is defined as:","a":"TP / (TP + FP)","w":["TP / (TP + FN)","(TP + TN) / total","TN / (TN + FP)"],"e":"TP / (TP + FN) is recall. Precision asks how many of the predicted positives are correct. Recall asks how many of the real positives were found."},{"t":"Web, AI & Software Engineering","q":"Retrieval-Augmented Generation (RAG) mainly helps an LLM by:","a":"Grounding its answers in relevant documents retrieved at query time","w":["Training the model from scratch on company data","Making the model smaller","Removing the need for prompts"],"e":"RAG lowers hallucination on company-specific questions without retraining the model. This is a common GenAI consulting use case."},{"t":"Web, AI & Software Engineering","q":"Which is an example of supervised learning?","a":"Classifying emails as spam using emails that already have labels","w":["Grouping customers into segments without labels","Reducing dimensions with PCA","An agent learning by trial and error from rewards"],"e":"The wrong options are clustering (unsupervised), dimensionality reduction (unsupervised) and reinforcement learning."},{"t":"Web, AI & Software Engineering","q":"The main advantage of microservices over a monolith is:","a":"Each service can be deployed and scaled on its own","w":["Simpler debugging and no network calls","Always lower infrastructure cost","No need for APIs"],"e":"The trade-offs are more complex operations, network latency and distributed data consistency."},{"t":"Web, AI & Software Engineering","q":"Agile/Scrum delivers software:","a":"Iteratively, in short sprints, with regular feedback","w":["In one big release at the end","Without any customer involvement","Only after all requirements are fixed up front"],"e":"Delivering only after all requirements are fixed up front describes the Waterfall model."},{"t":"Web, AI & Software Engineering","q":"What does `git rebase` do that `git merge` does not?","a":"It rewrites history by replaying commits on top of another base","w":["It deletes the branch","It creates a merge commit","It pushes to the remote"],"e":"Never rebase commits that other people have already pulled. Use merge on shared branches."},{"t":"Web, AI & Software Engineering","q":"An LLM \"hallucination\" is:","a":"Fluent, confident output that is factually wrong or made up","w":["The model refusing to answer","A slow response","An out-of-memory error"],"e":"Ways to reduce it include RAG, citations, lower temperature, human review and evaluation sets."}];
+const SECONDS_PER_Q = 75;
+const LETTERS = "ABCD";
+const TOPICS = [...new Set(BANK.map(q => q.t))];
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+const app = document.getElementById("app");
+const timerEl = document.getElementById("timer");
+const progressEl = document.getElementById("progress");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let cfg = { mode: "mock", count: 20, topics: new Set(TOPICS) };
+let S = null;      // current test state
+let tick = null;
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+/* ---------- setup screen ---------- */
+function renderSetup() {
+  stopTimer();
+  timerEl.hidden = true; progressEl.hidden = true;
+  const missed = store.get("oa-missed", []);
+  const history = store.get("oa-history", []);
+  const pool = cfg.mode === "mistakes" ? missed.length : BANK.filter(q => cfg.topics.has(q.t)).length;
+  const n = cfg.mode === "mistakes" ? missed.length : Math.min(cfg.count, pool);
+  app.innerHTML = `
+  <section class="setup">
+    <div>
+      <div class="eyebrow">Digital Consultant · technical MCQ round</div>
+      <h2>Practise the MCQ section under exam conditions</h2>
+      <p class="lede">${BANK.length} questions on OS, Networks, DBMS, OOP, DSA, Cloud, Security and Web/AI, the areas reported in past Accenture Japan campus OAs. Each attempt draws a fresh random set with shuffled options.</p>
+      <div class="modes" role="group" aria-label="Test mode">
+        <button class="mode" id="m-mock" aria-pressed="${cfg.mode === "mock"}"><b>Timed mock</b><span>${SECONDS_PER_Q}s per question, answers revealed only at the end, like the real OA.</span></button>
+        <button class="mode" id="m-practice" aria-pressed="${cfg.mode === "practice"}"><b>Topic practice</b><span>Untimed. See the answer and explanation right after each question.</span></button>
+        <button class="mode" id="m-mistakes" aria-pressed="${cfg.mode === "mistakes"}" ${missed.length ? "" : "disabled"}><b>Retry my mistakes</b><span>${missed.length ? missed.length + " question" + (missed.length > 1 ? "s" : "") + " you got wrong before." : "Questions you get wrong will collect here."}</span></button>
+      </div>
+      ${cfg.mode === "mistakes" ? "" : `
+      <div class="opts-row" role="group" aria-label="Topics">
+        ${TOPICS.map((t, i) => `<button class="chip" data-topic="${i}" aria-pressed="${cfg.topics.has(t)}">${esc(t)}<span class="n">${BANK.filter(q => q.t === t).length}</span></button>`).join("")}
+      </div>
+      <div class="opts-row" role="group" aria-label="Number of questions">
+        <span class="eyebrow">Questions</span>
+        ${[10, 20, 30, 50].map(c => `<button class="chip" data-count="${c}" aria-pressed="${cfg.count === c}">${c}</button>`).join("")}
+      </div>`}
+      <div class="opts-row">
+        <button class="btn primary" id="start" ${n ? "" : "disabled"}>Start ${n} question${n === 1 ? "" : "s"}${cfg.mode === "mock" ? ` · ${Math.round(n * SECONDS_PER_Q / 60)} min` : ""}</button>
+        ${n ? "" : `<span class="empty">Select at least one topic.</span>`}
+      </div>
+    </div>
+    <aside class="panel">
+      <h3>Your recent attempts</h3>
+      ${history.length ? `<ul class="history">${history.slice(-8).reverse().map(h => `<li><span>${esc(h.mode)} · ${esc(h.date)}</span><span class="mono">${h.score}/${h.total}</span></li>`).join("")}</ul>`
+        : `<p class="empty">No attempts yet. Your scores are saved in this browser only.</p>`}
+      <ul class="rules">
+        <li>Target: 16/20 or better on two different random sets.</li>
+        <li>Write scheduling, page-fault and subnet numericals on paper. Do not do them in your head.</li>
+        <li>Flag the questions you are unsure about and come back to them before you submit.</li>
+      </ul>
+    </aside>
+  </section>`;
+
+  for (const m of ["mock", "practice", "mistakes"]) {
+    const b = document.getElementById("m-" + m);
+    b.onclick = () => { cfg.mode = m; renderSetup(); };
+  }
+  app.querySelectorAll("[data-topic]").forEach(b => b.onclick = () => {
+    const t = TOPICS[+b.dataset.topic];
+    cfg.topics.has(t) ? cfg.topics.delete(t) : cfg.topics.add(t);
+    renderSetup();
+  });
+  app.querySelectorAll("[data-count]").forEach(b => b.onclick = () => { cfg.count = +b.dataset.count; renderSetup(); });
+  document.getElementById("start").onclick = start;
+}
+
+/* ---------- running a test ---------- */
+function start() {
+  let ids;
+  if (cfg.mode === "mistakes") ids = shuffle(store.get("oa-missed", []).filter(i => BANK[i]));
+  else ids = shuffle(BANK.map((q, i) => i).filter(i => cfg.topics.has(BANK[i].t))).slice(0, cfg.count);
+  const items = ids.map(id => {
+    const q = BANK[id];
+    const opts = shuffle([q.a, ...q.w]);
+    return { id, q, opts, ans: opts.indexOf(q.a) };
+  });
+  S = { mode: cfg.mode, items, picks: items.map(() => null), flags: new Set(), cur: 0, confirming: false,
+        timed: cfg.mode === "mock", remaining: items.length * SECONDS_PER_Q, startedAt: Date.now(), done: false };
+  if (S.timed) startTimer();
+  timerEl.hidden = !S.timed;
+  progressEl.hidden = false;
+  renderExam();
+}
+
+function startTimer() {
+  stopTimer();
+  const end = Date.now() + S.remaining * 1000;
+  const paint = () => {
+    S.remaining = Math.max(0, Math.round((end - Date.now()) / 1000));
+    const m = Math.floor(S.remaining / 60), s = S.remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    timerEl.classList.toggle("low", S.remaining <= 120);
+    if (S.remaining === 0) finish();
+  };
+  paint();
+  tick = setInterval(paint, 500);
+}
+function stopTimer() { if (tick) clearInterval(tick); tick = null; }
+
+function renderExam() {
+  const it = S.items[S.cur];
+  const answered = S.picks.filter(p => p !== null).length;
+  const reveal = S.mode !== "mock" && S.picks[S.cur] !== null;
+  progressEl.textContent = `${answered}/${S.items.length} answered`;
+  app.innerHTML = `
+  <section class="exam">
+    <article class="qcard">
+      <div class="qmeta"><span class="eyebrow mono">Q${S.cur + 1} of ${S.items.length}</span><span class="tag">${esc(it.q.t)}</span></div>
+      <p class="qtext">${esc(it.q.q)}</p>
+      <div class="choices" role="radiogroup" aria-label="Options">
+        ${it.opts.map((o, i) => {
+          let cls = "choice";
+          if (reveal) { if (i === it.ans) cls += " right"; else if (i === S.picks[S.cur]) cls += " wrong"; }
+          else if (S.picks[S.cur] === i) cls += " sel";
+          return `<button class="${cls}" role="radio" aria-checked="${S.picks[S.cur] === i}" data-opt="${i}" ${reveal ? "disabled" : ""}><span class="bubble">${LETTERS[i]}</span><span class="choice-text">${esc(o)}</span></button>`;
+        }).join("")}
+      </div>
+      ${reveal ? `<div class="explain"><b>${S.picks[S.cur] === it.ans ? "Correct." : "Answer: " + LETTERS[it.ans] + "."}</b> ${esc(it.q.e)}</div>` : ""}
+      <div class="nav">
+        <button class="btn" id="prev" ${S.cur === 0 ? "disabled" : ""}>Previous</button>
+        ${S.mode === "mock" ? `<button class="btn ${S.flags.has(S.cur) ? "flagged" : ""}" id="flag">${S.flags.has(S.cur) ? "Flagged" : "Flag for review"}</button>` : ""}
+        ${S.mode === "mock" && S.picks[S.cur] !== null ? `<button class="btn" id="clear">Clear answer</button>` : ""}
+        <span class="spacer"></span>
+        ${S.cur < S.items.length - 1 ? `<button class="btn primary" id="next">Next</button>` : `<button class="btn primary" id="submit">Submit test</button>`}
+      </div>
+    </article>
+    <aside class="panel sheet">
+      <h3>Answer sheet</h3>
+      <div class="count">${answered} answered · ${S.flags.size} flagged · ${S.items.length - answered} left</div>
+      <div class="grid">
+        ${S.items.map((x, i) => {
+          let c = "cell";
+          if (S.picks[i] !== null) c += S.mode === "mock" ? " done" : (S.picks[i] === x.ans ? " ok" : " ko");
+          if (S.flags.has(i)) c += " flag";
+          if (i === S.cur) c += " cur";
+          return `<button class="${c}" data-go="${i}" aria-label="Question ${i + 1}">${i + 1}</button>`;
+        }).join("")}
+      </div>
+      <div class="legend">
+        <span><i class="dot d"></i>Answered</span>
+        <span><i class="dot f"></i>Flagged for review</span>
+        <span><i class="dot"></i>Not answered</span>
+      </div>
+      <div class="opts-row"><button class="btn" id="submit2">Submit test</button><button class="btn" id="quit">Quit</button></div>
+      ${S.confirming ? `<div class="confirm" role="alert">
+        <span>${S.items.length - answered ? `${S.items.length - answered} question${S.items.length - answered > 1 ? "s are" : " is"} unanswered. ` : ""}${S.flags.size ? `${S.flags.size} flagged. ` : ""}Submit now?</span>
+        <div class="row"><button class="btn primary" id="yes">Submit</button><button class="btn" id="no">Keep working</button></div>
+      </div>` : ""}
+    </aside>
+  </section>`;
+
+  app.querySelectorAll("[data-opt]").forEach(b => b.onclick = () => { S.picks[S.cur] = +b.dataset.opt; renderExam(); });
+  app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { S.cur = +b.dataset.go; S.confirming = false; renderExam(); });
+  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+  on("prev", () => { S.cur--; renderExam(); });
+  on("next", () => { S.cur++; renderExam(); });
+  on("flag", () => { S.flags.has(S.cur) ? S.flags.delete(S.cur) : S.flags.add(S.cur); renderExam(); });
+  on("clear", () => { S.picks[S.cur] = null; renderExam(); });
+  const ask = () => { S.confirming = true; renderExam(); };
+  on("submit", ask); on("submit2", ask);
+  on("yes", finish);
+  on("no", () => { S.confirming = false; renderExam(); });
+  on("quit", () => { stopTimer(); S = null; renderSetup(); });
+}
+
+document.addEventListener("keydown", e => {
+  if (!S || S.done || e.target.closest("input, textarea")) return;
+  const k = e.key.toUpperCase();
+  if ("ABCD".includes(k) && k.length === 1) {
+    const b = app.querySelector(`[data-opt="${"ABCD".indexOf(k)}"]`);
+    if (b && !b.disabled) b.click();
+  } else if (e.key === "ArrowRight" && S.cur < S.items.length - 1) { S.cur++; renderExam(); }
+  else if (e.key === "ArrowLeft" && S.cur > 0) { S.cur--; renderExam(); }
+});
+
+/* ---------- results ---------- */
+function finish() {
+  if (!S || S.done) return;
+  stopTimer();
+  S.done = true;
+  timerEl.hidden = true; progressEl.hidden = true;
+  const correct = S.items.filter((x, i) => S.picks[i] === x.ans).length;
+  const total = S.items.length;
+  const used = Math.round((Date.now() - S.startedAt) / 1000);
+
+  // Remember mistakes; questions answered correctly leave the list.
+  const missed = new Set(store.get("oa-missed", []));
+  S.items.forEach((x, i) => { if (S.picks[i] === x.ans) missed.delete(x.id); else missed.add(x.id); });
+  store.set("oa-missed", [...missed]);
+  const history = store.get("oa-history", []);
+  const label = { mock: "Timed mock", practice: "Practice", mistakes: "Mistakes" }[S.mode];
+  history.push({ mode: label, date: new Date().toLocaleDateString(undefined, { day: "numeric", month: "short" }), score: correct, total });
+  store.set("oa-history", history.slice(-30));
+
+  const byTopic = {};
+  S.items.forEach((x, i) => {
+    const t = byTopic[x.q.t] ||= { right: 0, total: 0 };
+    t.total++; if (S.picks[i] === x.ans) t.right++;
+  });
+  const pct = Math.round(100 * correct / total);
+  const weak = Object.entries(byTopic).filter(([, v]) => v.right / v.total < 0.7).map(([t]) => t);
+  const verdict = pct >= 85 ? "Strong. This is shortlist territory. Run another random set to confirm it wasn't luck."
+    : pct >= 70 ? "Close. Fix the weak topics below and you should clear the cut-off comfortably."
+    : "Not there yet. Revise the weak topics from the cheat sheet, then use Retry my mistakes before your next mock.";
+
+  const order = S.items.map((x, i) => i).sort((a, b) => (S.picks[a] === S.items[a].ans) - (S.picks[b] === S.items[b].ans));
+  let showAll = false;
+
+  const paint = () => {
+    app.innerHTML = `
+    <section class="results">
+      <div class="score">
+        <div class="big mono">${correct}<small>/${total}</small></div>
+        <div>
+          <div class="eyebrow">${label} · ${pct}% · ${Math.floor(used / 60)}m ${used % 60}s used</div>
+          <p class="verdict">${verdict}</p>
+          ${weak.length ? `<p class="verdict" style="color:var(--muted)">Revise next: ${weak.map(esc).join(", ")}.</p>` : ""}
+        </div>
+      </div>
+      <div class="panel">
+        <h3>By topic</h3>
+        <div class="topics">
+          ${Object.entries(byTopic).map(([t, v]) => {
+            const p = Math.round(100 * v.right / v.total);
+            return `<div class="trow"><span>${esc(t)}</span><div class="track"><div class="fill ${p < 70 ? "weak" : ""}" style="width:${p}%"></div></div><span class="mono">${v.right}/${v.total}</span></div>`;
+          }).join("")}
+        </div>
+      </div>
+      <div class="toolbar">
+        <h3 style="flex:1">Review</h3>
+        <button class="btn" id="toggle">${showAll ? "Show mistakes only" : "Show all questions"}</button>
+        <button class="btn primary" id="again">New test</button>
+      </div>
+      <div class="review">
+        ${order.filter(i => showAll || S.picks[i] !== S.items[i].ans).map(i => {
+          const x = S.items[i], p = S.picks[i];
+          const cls = p === null ? "ritem s" : p === x.ans ? "ritem" : "ritem x";
+          return `<div class="${cls}">
+            <div class="eyebrow">Q${i + 1} · ${esc(x.q.t)}</div>
+            <p><b>${esc(x.q.q)}</b></p>
+            <p class="a">${p === null ? "Not answered." : p === x.ans ? "Your answer: " + esc(x.opts[p]) + " ✓" : "Your answer: " + esc(x.opts[p])}${p !== x.ans ? `<br>Correct: <b>${esc(x.q.a)}</b>` : ""}</p>
+            <p class="e">${esc(x.q.e)}</p>
+          </div>`;
+        }).join("") || `<p class="empty">No mistakes in this set.</p>`}
+      </div>
+    </section>`;
+    document.getElementById("toggle").onclick = () => { showAll = !showAll; paint(); };
+    document.getElementById("again").onclick = () => { S = null; renderSetup(); };
+  };
+  paint();
+  window.scrollTo(0, 0);
+}
+
+renderSetup();
+</script>

@@ -1,0 +1,435 @@
+<title>Accenture Japan OA Mock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: an exam console. Question sheet on the left, OMR-style answer grid on the right; stacks on phones. */
+:root {
+  --paper: #fbfafc;
+  --sheet: #ffffff;
+  --ink: #1f1a2b;
+  --muted: #6b6478;
+  --line: #e7dfe8;
+  --omr: #c2185b;         /* answer-sheet ink */
+  --omr-soft: #fbe6ef;
+  --good: #1f7a4d;
+  --good-soft: #e3f3ea;
+  --bad: #b3261e;
+  --bad-soft: #fbe9e7;
+  --flag: #a15c00;
+  --flag-soft: #fff1d6;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #17141d; --sheet: #211d29; --ink: #efeaf4; --muted: #a79fb3; --line: #352f40;
+    --omr: #f06292; --omr-soft: #3a2130; --good: #6fcf97; --good-soft: #1b3226;
+    --bad: #f28b82; --bad-soft: #3a1f1d; --flag: #f3b54a; --flag-soft: #3a2d14;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #17141d; --sheet: #211d29; --ink: #efeaf4; --muted: #a79fb3; --line: #352f40;
+  --omr: #f06292; --omr-soft: #3a2130; --good: #6fcf97; --good-soft: #1b3226;
+  --bad: #f28b82; --bad-soft: #3a1f1d; --flag: #f3b54a; --flag-soft: #3a2d14;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55; padding: 0 16px; padding-block: 0 48px; }
+.wrap { max-width: 1040px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, label:focus-within { outline: 2px solid var(--omr); outline-offset: 2px; }
+.eyebrow { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.mono { font-family: var(--f-mono); font-variant-numeric: tabular-nums; }
+
+/* top bar */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); border-bottom: 1px solid var(--line); margin: 0 -16px; padding: 12px 16px; }
+.bar .wrap { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.bar h1 { font-size: 18px; }
+.bar .spacer { flex: 1; }
+.timer { font-family: var(--f-mono); font-size: 18px; font-weight: 600; padding: 4px 10px; border: 1.5px solid var(--omr); color: var(--omr); border-radius: 6px; font-variant-numeric: tabular-nums; }
+.timer.low { background: var(--bad-soft); border-color: var(--bad); color: var(--bad); }
+
+.btn { border: 1.5px solid var(--line); background: var(--sheet); padding: 8px 14px; border-radius: 8px; font-weight: 500; }
+.btn:hover { border-color: var(--omr); }
+.btn.primary { background: var(--omr); border-color: var(--omr); color: #fff; }
+:root[data-theme="dark"] .btn.primary { color: #17141d; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn.primary { color: #17141d; } }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+/* setup */
+.setup { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px; margin-top: 32px; align-items: start; }
+.setup h2 { font-size: clamp(28px, 4.5vw, 40px); margin: 6px 0 12px; }
+.lede { color: var(--muted); max-width: 58ch; margin: 0 0 20px; }
+.modes { display: grid; gap: 12px; }
+.mode { text-align: left; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 10px; padding: 14px 16px; display: grid; gap: 2px; }
+.mode[aria-pressed="true"] { border-color: var(--omr); box-shadow: inset 4px 0 0 var(--omr); }
+.mode b { font-family: var(--f-display); font-size: 17px; }
+.mode span { color: var(--muted); font-size: 14px; }
+.opts-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 18px 0 8px; }
+.chip { border: 1.5px solid var(--line); background: var(--sheet); border-radius: 999px; padding: 5px 12px; font-size: 13.5px; }
+.chip[aria-pressed="true"] { background: var(--omr-soft); border-color: var(--omr); color: var(--ink); }
+.chip .n { color: var(--muted); font-family: var(--f-mono); font-size: 12px; margin-left: 4px; }
+.panel { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 18px; }
+.panel h3 { font-size: 16px; margin-bottom: 10px; }
+.history { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 14px; }
+.history li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.empty { color: var(--muted); font-size: 14px; margin: 0; }
+.rules { margin: 14px 0 0; padding-left: 18px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+
+/* exam */
+.exam { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 24px; margin-top: 24px; align-items: start; }
+.qcard { background: var(--sheet); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.qmeta { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.tag { font-size: 12px; padding: 2px 8px; border-radius: 4px; background: var(--omr-soft); color: var(--ink); }
+.qtext { font-size: 18px; font-weight: 500; margin: 0 0 18px; max-width: 65ch; }
+.choices { display: grid; gap: 10px; }
+.choice { display: flex; gap: 12px; align-items: flex-start; text-align: left; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 10px; padding: 11px 14px; width: 100%; }
+.choice:hover { border-color: var(--omr); }
+.bubble { flex: none; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--omr); color: var(--omr); display: grid; place-items: center; font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; margin-top: -1px; }
+.choice.sel .bubble { background: var(--omr); color: var(--sheet); }
+.choice.sel { border-color: var(--omr); }
+.choice.right { border-color: var(--good); background: var(--good-soft); }
+.choice.right .bubble { background: var(--good); border-color: var(--good); color: var(--sheet); }
+.choice.wrong { border-color: var(--bad); background: var(--bad-soft); }
+.choice.wrong .bubble { background: var(--bad); border-color: var(--bad); color: var(--sheet); }
+.choice-text { min-width: 0; }
+.explain { margin-top: 16px; padding: 12px 14px; border-radius: 8px; background: var(--paper); border: 1px dashed var(--line); font-size: 14.5px; }
+.explain b { font-family: var(--f-display); }
+.nav { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+.nav .spacer { flex: 1; }
+.btn.flagged { border-color: var(--flag); background: var(--flag-soft); }
+
+.sheet h3 { font-size: 15px; margin-bottom: 4px; }
+.grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin: 10px 0 12px; }
+.cell { aspect-ratio: 1; max-width: 100%; border: 1.5px solid var(--line); background: var(--sheet); border-radius: 50%; font-family: var(--f-mono); font-size: 12.5px; font-weight: 600; display: grid; place-items: center; padding: 0; position: relative; }
+.cell.done { background: var(--omr); border-color: var(--omr); color: var(--sheet); }
+.cell.flag::after { content: ""; position: absolute; top: -2px; right: -2px; width: 9px; height: 9px; border-radius: 50%; background: var(--flag); border: 2px solid var(--sheet); }
+.cell.cur { outline: 2px solid var(--ink); outline-offset: 2px; }
+.cell.ok { background: var(--good); border-color: var(--good); color: var(--sheet); }
+.cell.ko { background: var(--bad); border-color: var(--bad); color: var(--sheet); }
+.legend { display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; border: 1.5px solid var(--line); }
+.dot.d { background: var(--omr); border-color: var(--omr); }
+.dot.f { background: var(--flag); border-color: var(--flag); }
+.count { font-size: 13.5px; color: var(--muted); margin-bottom: 12px; }
+
+/* confirm */
+.confirm { margin-top: 12px; padding: 12px; border: 1.5px solid var(--flag); background: var(--flag-soft); border-radius: 8px; font-size: 14px; display: grid; gap: 10px; }
+.confirm .row { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* results */
+.results { margin-top: 28px; display: grid; gap: 24px; }
+.score { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 24px; align-items: center; }
+.big { font-family: var(--f-display); font-size: clamp(48px, 9vw, 76px); line-height: 1; }
+.big small { font-size: .4em; color: var(--muted); }
+.verdict { font-size: 16px; max-width: 60ch; margin: 6px 0 0; }
+.topics { display: grid; gap: 10px; }
+.trow { display: grid; grid-template-columns: minmax(0, 200px) minmax(0, 1fr) 56px; gap: 12px; align-items: center; font-size: 14px; }
+.track { height: 10px; background: var(--omr-soft); border-radius: 999px; overflow: hidden; }
+.fill { height: 100%; background: var(--omr); border-radius: 999px; }
+.fill.weak { background: var(--bad); }
+.review { display: grid; gap: 12px; }
+.ritem { background: var(--sheet); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; border-left: 4px solid var(--good); }
+.ritem.x { border-left-color: var(--bad); }
+.ritem.s { border-left-color: var(--muted); }
+.ritem p { margin: 4px 0; }
+.ritem .a { font-size: 14px; }
+.ritem .e { font-size: 14px; color: var(--muted); }
+.toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+
+@media (max-width: 760px) {
+  .setup, .exam { grid-template-columns: minmax(0, 1fr); }
+  .grid { grid-template-columns: repeat(10, 1fr); }
+  .score { grid-template-columns: minmax(0, 1fr); }
+  .trow { grid-template-columns: minmax(0, 1fr) 48px; }
+  .trow .track { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .choice, .cell, .btn, .chip, .mode { transition: border-color .15s, background-color .15s; }
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <h1>Accenture Japan OA Mock</h1>
+    <span class="spacer"></span>
+    <span id="progress" class="eyebrow" hidden></span>
+    <span id="timer" class="timer" hidden>25:00</span>
+  </div>
+</header>
+
+<main class="wrap" id="app"></main>
+
+<script>
+const BANK = /*QUESTIONS*/[];
+const SECONDS_PER_Q = 75;
+const LETTERS = "ABCD";
+const TOPICS = [...new Set(BANK.map(q => q.t))];
+
+const store = {
+  get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+};
+
+const app = document.getElementById("app");
+const timerEl = document.getElementById("timer");
+const progressEl = document.getElementById("progress");
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+let cfg = { mode: "mock", count: 20, topics: new Set(TOPICS) };
+let S = null;      // current test state
+let tick = null;
+
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+/* ---------- setup screen ---------- */
+function renderSetup() {
+  stopTimer();
+  timerEl.hidden = true; progressEl.hidden = true;
+  const missed = store.get("oa-missed", []);
+  const history = store.get("oa-history", []);
+  const pool = cfg.mode === "mistakes" ? missed.length : BANK.filter(q => cfg.topics.has(q.t)).length;
+  const n = cfg.mode === "mistakes" ? missed.length : Math.min(cfg.count, pool);
+  app.innerHTML = `
+  <section class="setup">
+    <div>
+      <div class="eyebrow">Digital Consultant · technical MCQ round</div>
+      <h2>Practise the MCQ section under exam conditions</h2>
+      <p class="lede">${BANK.length} questions on OS, Networks, DBMS, OOP, DSA, Cloud, Security and Web/AI, the areas reported in past Accenture Japan campus OAs. Each attempt draws a fresh random set with shuffled options.</p>
+      <div class="modes" role="group" aria-label="Test mode">
+        <button class="mode" id="m-mock" aria-pressed="${cfg.mode === "mock"}"><b>Timed mock</b><span>${SECONDS_PER_Q}s per question, answers revealed only at the end, like the real OA.</span></button>
+        <button class="mode" id="m-practice" aria-pressed="${cfg.mode === "practice"}"><b>Topic practice</b><span>Untimed. See the answer and explanation right after each question.</span></button>
+        <button class="mode" id="m-mistakes" aria-pressed="${cfg.mode === "mistakes"}" ${missed.length ? "" : "disabled"}><b>Retry my mistakes</b><span>${missed.length ? missed.length + " question" + (missed.length > 1 ? "s" : "") + " you got wrong before." : "Questions you get wrong will collect here."}</span></button>
+      </div>
+      ${cfg.mode === "mistakes" ? "" : `
+      <div class="opts-row" role="group" aria-label="Topics">
+        ${TOPICS.map((t, i) => `<button class="chip" data-topic="${i}" aria-pressed="${cfg.topics.has(t)}">${esc(t)}<span class="n">${BANK.filter(q => q.t === t).length}</span></button>`).join("")}
+      </div>
+      <div class="opts-row" role="group" aria-label="Number of questions">
+        <span class="eyebrow">Questions</span>
+        ${[10, 20, 30, 50].map(c => `<button class="chip" data-count="${c}" aria-pressed="${cfg.count === c}">${c}</button>`).join("")}
+      </div>`}
+      <div class="opts-row">
+        <button class="btn primary" id="start" ${n ? "" : "disabled"}>Start ${n} question${n === 1 ? "" : "s"}${cfg.mode === "mock" ? ` · ${Math.round(n * SECONDS_PER_Q / 60)} min` : ""}</button>
+        ${n ? "" : `<span class="empty">Select at least one topic.</span>`}
+      </div>
+    </div>
+    <aside class="panel">
+      <h3>Your recent attempts</h3>
+      ${history.length ? `<ul class="history">${history.slice(-8).reverse().map(h => `<li><span>${esc(h.mode)} · ${esc(h.date)}</span><span class="mono">${h.score}/${h.total}</span></li>`).join("")}</ul>`
+        : `<p class="empty">No attempts yet. Your scores are saved in this browser only.</p>`}
+      <ul class="rules">
+        <li>Target: 16/20 or better on two different random sets.</li>
+        <li>Write scheduling, page-fault and subnet numericals on paper. Do not do them in your head.</li>
+        <li>Flag the questions you are unsure about and come back to them before you submit.</li>
+      </ul>
+    </aside>
+  </section>`;
+
+  for (const m of ["mock", "practice", "mistakes"]) {
+    const b = document.getElementById("m-" + m);
+    b.onclick = () => { cfg.mode = m; renderSetup(); };
+  }
+  app.querySelectorAll("[data-topic]").forEach(b => b.onclick = () => {
+    const t = TOPICS[+b.dataset.topic];
+    cfg.topics.has(t) ? cfg.topics.delete(t) : cfg.topics.add(t);
+    renderSetup();
+  });
+  app.querySelectorAll("[data-count]").forEach(b => b.onclick = () => { cfg.count = +b.dataset.count; renderSetup(); });
+  document.getElementById("start").onclick = start;
+}
+
+/* ---------- running a test ---------- */
+function start() {
+  let ids;
+  if (cfg.mode === "mistakes") ids = shuffle(store.get("oa-missed", []).filter(i => BANK[i]));
+  else ids = shuffle(BANK.map((q, i) => i).filter(i => cfg.topics.has(BANK[i].t))).slice(0, cfg.count);
+  const items = ids.map(id => {
+    const q = BANK[id];
+    const opts = shuffle([q.a, ...q.w]);
+    return { id, q, opts, ans: opts.indexOf(q.a) };
+  });
+  S = { mode: cfg.mode, items, picks: items.map(() => null), flags: new Set(), cur: 0, confirming: false,
+        timed: cfg.mode === "mock", remaining: items.length * SECONDS_PER_Q, startedAt: Date.now(), done: false };
+  if (S.timed) startTimer();
+  timerEl.hidden = !S.timed;
+  progressEl.hidden = false;
+  renderExam();
+}
+
+function startTimer() {
+  stopTimer();
+  const end = Date.now() + S.remaining * 1000;
+  const paint = () => {
+    S.remaining = Math.max(0, Math.round((end - Date.now()) / 1000));
+    const m = Math.floor(S.remaining / 60), s = S.remaining % 60;
+    timerEl.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    timerEl.classList.toggle("low", S.remaining <= 120);
+    if (S.remaining === 0) finish();
+  };
+  paint();
+  tick = setInterval(paint, 500);
+}
+function stopTimer() { if (tick) clearInterval(tick); tick = null; }
+
+function renderExam() {
+  const it = S.items[S.cur];
+  const answered = S.picks.filter(p => p !== null).length;
+  const reveal = S.mode !== "mock" && S.picks[S.cur] !== null;
+  progressEl.textContent = `${answered}/${S.items.length} answered`;
+  app.innerHTML = `
+  <section class="exam">
+    <article class="qcard">
+      <div class="qmeta"><span class="eyebrow mono">Q${S.cur + 1} of ${S.items.length}</span><span class="tag">${esc(it.q.t)}</span></div>
+      <p class="qtext">${esc(it.q.q)}</p>
+      <div class="choices" role="radiogroup" aria-label="Options">
+        ${it.opts.map((o, i) => {
+          let cls = "choice";
+          if (reveal) { if (i === it.ans) cls += " right"; else if (i === S.picks[S.cur]) cls += " wrong"; }
+          else if (S.picks[S.cur] === i) cls += " sel";
+          return `<button class="${cls}" role="radio" aria-checked="${S.picks[S.cur] === i}" data-opt="${i}" ${reveal ? "disabled" : ""}><span class="bubble">${LETTERS[i]}</span><span class="choice-text">${esc(o)}</span></button>`;
+        }).join("")}
+      </div>
+      ${reveal ? `<div class="explain"><b>${S.picks[S.cur] === it.ans ? "Correct." : "Answer: " + LETTERS[it.ans] + "."}</b> ${esc(it.q.e)}</div>` : ""}
+      <div class="nav">
+        <button class="btn" id="prev" ${S.cur === 0 ? "disabled" : ""}>Previous</button>
+        ${S.mode === "mock" ? `<button class="btn ${S.flags.has(S.cur) ? "flagged" : ""}" id="flag">${S.flags.has(S.cur) ? "Flagged" : "Flag for review"}</button>` : ""}
+        ${S.mode === "mock" && S.picks[S.cur] !== null ? `<button class="btn" id="clear">Clear answer</button>` : ""}
+        <span class="spacer"></span>
+        ${S.cur < S.items.length - 1 ? `<button class="btn primary" id="next">Next</button>` : `<button class="btn primary" id="submit">Submit test</button>`}
+      </div>
+    </article>
+    <aside class="panel sheet">
+      <h3>Answer sheet</h3>
+      <div class="count">${answered} answered · ${S.flags.size} flagged · ${S.items.length - answered} left</div>
+      <div class="grid">
+        ${S.items.map((x, i) => {
+          let c = "cell";
+          if (S.picks[i] !== null) c += S.mode === "mock" ? " done" : (S.picks[i] === x.ans ? " ok" : " ko");
+          if (S.flags.has(i)) c += " flag";
+          if (i === S.cur) c += " cur";
+          return `<button class="${c}" data-go="${i}" aria-label="Question ${i + 1}">${i + 1}</button>`;
+        }).join("")}
+      </div>
+      <div class="legend">
+        <span><i class="dot d"></i>Answered</span>
+        <span><i class="dot f"></i>Flagged for review</span>
+        <span><i class="dot"></i>Not answered</span>
+      </div>
+      <div class="opts-row"><button class="btn" id="submit2">Submit test</button><button class="btn" id="quit">Quit</button></div>
+      ${S.confirming ? `<div class="confirm" role="alert">
+        <span>${S.items.length - answered ? `${S.items.length - answered} question${S.items.length - answered > 1 ? "s are" : " is"} unanswered. ` : ""}${S.flags.size ? `${S.flags.size} flagged. ` : ""}Submit now?</span>
+        <div class="row"><button class="btn primary" id="yes">Submit</button><button class="btn" id="no">Keep working</button></div>
+      </div>` : ""}
+    </aside>
+  </section>`;
+
+  app.querySelectorAll("[data-opt]").forEach(b => b.onclick = () => { S.picks[S.cur] = +b.dataset.opt; renderExam(); });
+  app.querySelectorAll("[data-go]").forEach(b => b.onclick = () => { S.cur = +b.dataset.go; S.confirming = false; renderExam(); });
+  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.onclick = fn; };
+  on("prev", () => { S.cur--; renderExam(); });
+  on("next", () => { S.cur++; renderExam(); });
+  on("flag", () => { S.flags.has(S.cur) ? S.flags.delete(S.cur) : S.flags.add(S.cur); renderExam(); });
+  on("clear", () => { S.picks[S.cur] = null; renderExam(); });
+  const ask = () => { S.confirming = true; renderExam(); };
+  on("submit", ask); on("submit2", ask);
+  on("yes", finish);
+  on("no", () => { S.confirming = false; renderExam(); });
+  on("quit", () => { stopTimer(); S = null; renderSetup(); });
+}
+
+document.addEventListener("keydown", e => {
+  if (!S || S.done || e.target.closest("input, textarea")) return;
+  const k = e.key.toUpperCase();
+  if ("ABCD".includes(k) && k.length === 1) {
+    const b = app.querySelector(`[data-opt="${"ABCD".indexOf(k)}"]`);
+    if (b && !b.disabled) b.click();
+  } else if (e.key === "ArrowRight" && S.cur < S.items.length - 1) { S.cur++; renderExam(); }
+  else if (e.key === "ArrowLeft" && S.cur > 0) { S.cur--; renderExam(); }
+});
+
+/* ---------- results ---------- */
+function finish() {
+  if (!S || S.done) return;
+  stopTimer();
+  S.done = true;
+  timerEl.hidden = true; progressEl.hidden = true;
+  const correct = S.items.filter((x, i) => S.picks[i] === x.ans).length;
+  const total = S.items.length;
+  const used = Math.round((Date.now() - S.startedAt) / 1000);
+
+  // Remember mistakes; questions answered correctly leave the list.
+  const missed = new Set(store.get("oa-missed", []));
+  S.items.forEach((x, i) => { if (S.picks[i] === x.ans) missed.delete(x.id); else missed.add(x.id); });
+  store.set("oa-missed", [...missed]);
+  const history = store.get("oa-history", []);
+  const label = { mock: "Timed mock", practice: "Practice", mistakes: "Mistakes" }[S.mode];
+  history.push({ mode: label, date: new Date().toLocaleDateString(undefined, { day: "numeric", month: "short" }), score: correct, total });
+  store.set("oa-history", history.slice(-30));
+
+  const byTopic = {};
+  S.items.forEach((x, i) => {
+    const t = byTopic[x.q.t] ||= { right: 0, total: 0 };
+    t.total++; if (S.picks[i] === x.ans) t.right++;
+  });
+  const pct = Math.round(100 * correct / total);
+  const weak = Object.entries(byTopic).filter(([, v]) => v.right / v.total < 0.7).map(([t]) => t);
+  const verdict = pct >= 85 ? "Strong. This is shortlist territory. Run another random set to confirm it wasn't luck."
+    : pct >= 70 ? "Close. Fix the weak topics below and you should clear the cut-off comfortably."
+    : "Not there yet. Revise the weak topics from the cheat sheet, then use Retry my mistakes before your next mock.";
+
+  const order = S.items.map((x, i) => i).sort((a, b) => (S.picks[a] === S.items[a].ans) - (S.picks[b] === S.items[b].ans));
+  let showAll = false;
+
+  const paint = () => {
+    app.innerHTML = `
+    <section class="results">
+      <div class="score">
+        <div class="big mono">${correct}<small>/${total}</small></div>
+        <div>
+          <div class="eyebrow">${label} · ${pct}% · ${Math.floor(used / 60)}m ${used % 60}s used</div>
+          <p class="verdict">${verdict}</p>
+          ${weak.length ? `<p class="verdict" style="color:var(--muted)">Revise next: ${weak.map(esc).join(", ")}.</p>` : ""}
+        </div>
+      </div>
+      <div class="panel">
+        <h3>By topic</h3>
+        <div class="topics">
+          ${Object.entries(byTopic).map(([t, v]) => {
+            const p = Math.round(100 * v.right / v.total);
+            return `<div class="trow"><span>${esc(t)}</span><div class="track"><div class="fill ${p < 70 ? "weak" : ""}" style="width:${p}%"></div></div><span class="mono">${v.right}/${v.total}</span></div>`;
+          }).join("")}
+        </div>
+      </div>
+      <div class="toolbar">
+        <h3 style="flex:1">Review</h3>
+        <button class="btn" id="toggle">${showAll ? "Show mistakes only" : "Show all questions"}</button>
+        <button class="btn primary" id="again">New test</button>
+      </div>
+      <div class="review">
+        ${order.filter(i => showAll || S.picks[i] !== S.items[i].ans).map(i => {
+          const x = S.items[i], p = S.picks[i];
+          const cls = p === null ? "ritem s" : p === x.ans ? "ritem" : "ritem x";
+          return `<div class="${cls}">
+            <div class="eyebrow">Q${i + 1} · ${esc(x.q.t)}</div>
+            <p><b>${esc(x.q.q)}</b></p>
+            <p class="a">${p === null ? "Not answered." : p === x.ans ? "Your answer: " + esc(x.opts[p]) + " ✓" : "Your answer: " + esc(x.opts[p])}${p !== x.ans ? `<br>Correct: <b>${esc(x.q.a)}</b>` : ""}</p>
+            <p class="e">${esc(x.q.e)}</p>
+          </div>`;
+        }).join("") || `<p class="empty">No mistakes in this set.</p>`}
+      </div>
+    </section>`;
+    document.getElementById("toggle").onclick = () => { showAll = !showAll; paint(); };
+    document.getElementById("again").onclick = () => { S = null; renderSetup(); };
+  };
+  paint();
+  window.scrollTo(0, 0);
+}
+
+renderSetup();
+</script>
