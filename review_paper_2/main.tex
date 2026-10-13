@@ -20,13 +20,12 @@
 % ---------------- Packages -------------------------------------------
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{mathpazo}
-\usepackage[scaled=0.92]{helvet}
+\usepackage{mathptmx}
 \usepackage[a4paper,top=2.2cm,bottom=2.2cm,left=1.7cm,right=1.7cm,
             columnsep=0.7cm,headheight=14pt,headsep=0.4cm]{geometry}
 \usepackage{amsmath}
 \usepackage{booktabs,tabularx,array,multirow}
-\usepackage[font=small,labelfont={bf,sf},labelsep=period,skip=4pt]{caption}
+\usepackage[font=small,labelfont=bf,labelsep=period,skip=4pt]{caption}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
 \usepackage[round,authoryear]{natbib}
@@ -39,7 +38,7 @@
 \usepackage{enumitem}
 \usepackage{microtype}
 \usepackage{xurl}
-\usepackage[colorlinks=true,linkcolor=accent,citecolor=accent,urlcolor=accent]{hyperref}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=black]{hyperref}
 \urlstyle{same}
 
 % ---------------- Colours (colour-blind safe) -------------------------
@@ -52,13 +51,14 @@
 \definecolor{cE}{RGB}{90,90,90}      % grey
 
 % ---------------- House style ------------------------------------------
-\titleformat{\section}{\normalfont\sffamily\bfseries\large\color{accent}}{\thesection.}{0.5em}{}
-\titleformat{\subsection}{\normalfont\itshape\normalsize}{\thesubsection.}{0.5em}{}
+\titleformat{\section}{\normalfont\bfseries\fontsize{11}{13}\selectfont}{\thesection.}{0.5em}{}
+\titleformat{\subsection}{\normalfont\bfseries\itshape\normalsize}{\thesubsection.}{0.5em}{}
 \titlespacing*{\section}{0pt}{11pt plus 2pt minus 1pt}{5pt}
 \titlespacing*{\subsection}{0pt}{8pt plus 2pt}{3pt}
 \setlength{\parindent}{1.1em}
 \renewcommand{\arraystretch}{1.15}
 \setlist{itemsep=1pt,topsep=3pt,leftmargin=1.3em}
+\raggedbottom
 \renewcommand{\topfraction}{0.9}
 \renewcommand{\dbltopfraction}{0.9}
 \renewcommand{\textfraction}{0.08}
@@ -67,14 +67,14 @@
 
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\footnotesize\sffamily \AuthorOne{} and \AuthorTwo}
-\fancyhead[R]{\footnotesize\sffamily\itshape \RunningTitle}
-\fancyfoot[C]{\footnotesize\sffamily\thepage}
+\fancyhead[L]{\footnotesize \AuthorOne{} and \AuthorTwo}
+\fancyhead[R]{\footnotesize\itshape \RunningTitle}
+\fancyfoot[C]{\footnotesize\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
 \fancypagestyle{first}{\fancyhf{}%
-  \fancyhead[L]{\footnotesize\sffamily\bfseries\color{accent} REVIEW ARTICLE}%
-  \fancyhead[R]{\footnotesize\sffamily Tectonic geomorphology}%
-  \fancyfoot[C]{\footnotesize\sffamily\thepage}}
+  \fancyhead[L]{\footnotesize\bfseries REVIEW ARTICLE}%
+  \fancyhead[R]{\footnotesize Tectonic geomorphology}%
+  \fancyfoot[C]{\footnotesize\thepage}}
 
 \newcolumntype{L}{>{\raggedright\arraybackslash}X}
 \newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}}
@@ -90,43 +90,22 @@
 \twocolumn[{%
 \thispagestyle{first}
 \begin{center}
-{\sffamily\bfseries\fontsize{15.5}{19}\selectfont\color{accent}
+{\bfseries\fontsize{16}{20}\selectfont
 Testing the tectonic significance of river-profile and drainage-basin morphometry in
 low-strain intraplate settings: a comparative review from the Ardenne, the western Rhenish
 shield and the Upper Rhine Graben (NW Europe)\par}
-\vspace{8pt}
-{\large \AuthorOne\textsuperscript{a,*} and \AuthorTwo\textsuperscript{b}\par}
-\vspace{4pt}
-{\footnotesize\itshape \textsuperscript{a}\AffilOne\quad
-\textsuperscript{b}\AffilTwo\\ \textsuperscript{*}Corresponding author. E-mail: \CorrEmail\par}
-\end{center}
-\vspace{4pt}
-\noindent\rule{\textwidth}{0.6pt}\\[-2pt]
-\noindent
-\begin{minipage}[t]{0.29\textwidth}
-\vspace{4pt}
-{\sffamily\bfseries\footnotesize\color{accent} A R T I C L E \quad I N F O}\par
-\vspace{2pt}\rule{\linewidth}{0.3pt}\par\vspace{3pt}
-{\footnotesize\itshape Keywords:}\par
-{\footnotesize Longitudinal river profile\\ Stream-gradient index\\ Mountain-front sinuosity\\
-Hypsometric integral\\ $R_1$ and $S_\mathrm{r}$ indices\\ Intraplate uplift\\ Ardenne--Rhenish shield\\
-Upper Rhine Graben\par}
+\vspace{10pt}
+{\fontsize{11}{13}\selectfont \AuthorOne\textsuperscript{a,*} and \AuthorTwo\textsuperscript{b}\par}
 \vspace{6pt}
-{\footnotesize\itshape Highlights:}\par
-{\footnotesize
-\begin{itemize}[leftmargin=0.9em,itemsep=0pt,topsep=1pt]
-  \item Three NW European studies of fluvial morphometry are compared.
-  \item All three remove a dominant non-tectonic control before reading tectonics.
-  \item Profile indices map where uplift acts; basin-scale ratios estimate when.
-  \item The NE Ardenne--N Eifel stands out as the youngest uplift in two studies.
-  \item An integrated, multi-scale workflow is proposed.
-\end{itemize}\par}
-\end{minipage}\hfill
-\begin{minipage}[t]{0.67\textwidth}
-\vspace{4pt}
-{\sffamily\bfseries\footnotesize\color{accent} A B S T R A C T}\par
-\vspace{2pt}\rule{\linewidth}{0.3pt}\par\vspace{3pt}
-\small
+{\footnotesize\itshape
+\textsuperscript{a}\AffilOne\\
+\textsuperscript{b}\AffilTwo\\
+\textsuperscript{*}Corresponding author. E-mail: \CorrEmail\par}
+\end{center}
+\vspace{6pt}
+\noindent\rule{\textwidth}{0.8pt}\par\vspace{5pt}
+\noindent{\bfseries\fontsize{10}{12}\selectfont Abstract}\par\vspace{3pt}
+{\small\noindent
 Rivers in slowly deforming regions carry only faint traces of tectonics, and these traces are
 easily confused with the effects of rock strength, discharge, inherited relief and Pleistocene
 climate. This review compares three studies that tested how far morphometric indices can isolate a
@@ -145,10 +124,14 @@ $R_1$ against the logarithm of basin area falls from 0.51 to 0.24 from the young
 area. Profile indices therefore show where tectonics acts over $10^4$--$10^5$ years, whereas $S_\mathrm{r}$
 gives the relative timing of uplift over $10^5$--$10^6$ years. We discuss the shared limits of these
 methods (lithology, inheritance, data resolution and the lack of absolute ages) and propose a
-multi-scale workflow for low-strain settings.
-\end{minipage}\\[4pt]
-\noindent\rule{\textwidth}{0.6pt}
-\vspace{10pt}
+multi-scale workflow for low-strain settings.\par}
+\vspace{5pt}
+{\small\noindent\textbf{Keywords:} Longitudinal river profile; Stream-gradient index; Mountain-front
+sinuosity; Hypsometric integral; $R_1$ and $S_\mathrm{r}$ indices; Intraplate uplift; Ardenne--Rhenish
+shield; Upper Rhine Graben\par}
+\vspace{5pt}
+\noindent\rule{\textwidth}{0.8pt}
+\vspace{12pt}
 }]
 
 % =====================================================================
@@ -844,25 +827,6 @@ independent ages and fault data. Composite indices that combine several measures
 of relative active tectonics of \citet{ElHamdouni2008}, could serve as a summary at the regional scale.
 
 % =====================================================================
-\section{Future research directions}
-
-\begin{enumerate}
-  \item \textbf{Calibrating $S_\mathrm{r}$.} Apply the $R_1$--$S_\mathrm{r}$ method in regions of known uplift
-        age and rate, ideally with cosmogenic or terrace chronologies, to turn the relative scale into
-        an absolute one.
-  \item \textbf{Separating uplift rate from age.} Test regions where rate varies but timing is similar,
-        and vice versa, as suggested by \citet{Demoulin2011}.
-  \item \textbf{High-resolution re-analysis.} Re-examine the Ardenne profiles and the URG
-        intra-graben faults with lidar-based DEMs and contour intervals well below 20~m.
-  \item \textbf{Linking with $\chi$ and steepness.} Compare profile, integral and $\chi$-based indices on
-        the same rivers to test which best separates tectonic and lithological signals.
-  \item \textbf{Quantifying rock strength.} Replace qualitative lithological classes with measured rock
-        strength or erodibility, so that lithology can be removed statistically.
-  \item \textbf{Joint use with geodesy and seismology.} Compare morphometric anomalies with modern
-        GNSS velocities and seismicity to separate active from inherited landscapes.
-\end{enumerate}
-
-% =====================================================================
 \section{Conclusions}
 
 The three studies reviewed here show that tectonic signals can be recovered from fluvial landscapes even
@@ -879,6 +843,27 @@ Profile and front indices tell us \emph{where} tectonics acts; basin-scale ratio
 none yet gives absolute ages. Combining them within a single, multi-scale workflow that is tested
 against independent chronologies offers the best route to a reliable reading of tectonics from rivers in
 low-strain intraplate regions.
+
+% =====================================================================
+\section{Future research directions}
+
+Building on the conclusions above, six lines of work would most improve the reading of tectonics
+from fluvial landscapes in low-strain regions:
+\begin{enumerate}
+  \item \textbf{Calibrating $S_\mathrm{r}$.} Apply the $R_1$--$S_\mathrm{r}$ method in regions of known uplift
+        age and rate, ideally with cosmogenic or terrace chronologies, to turn the relative scale into
+        an absolute one.
+  \item \textbf{Separating uplift rate from age.} Test regions where rate varies but timing is similar,
+        and vice versa, as suggested by \citet{Demoulin2011}.
+  \item \textbf{High-resolution re-analysis.} Re-examine the Ardenne profiles and the URG
+        intra-graben faults with lidar-based DEMs and contour intervals well below 20~m.
+  \item \textbf{Linking with $\chi$ and steepness.} Compare profile, integral and $\chi$-based indices on
+        the same rivers to test which best separates tectonic and lithological signals.
+  \item \textbf{Quantifying rock strength.} Replace qualitative lithological classes with measured rock
+        strength or erodibility, so that lithology can be removed statistically.
+  \item \textbf{Joint use with geodesy and seismology.} Compare morphometric anomalies with modern
+        GNSS velocities and seismicity to separate active from inherited landscapes.
+\end{enumerate}
 
 % =====================================================================
 \section*{Acknowledgements}
